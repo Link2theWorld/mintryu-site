@@ -18,10 +18,11 @@ const AVATAR = { path: "/avatar.jpg", width: 460, height: 460 };
 const PERSON = {
   ...PERSON_REF,
   alternateName: ["Mint", "MINT RYU"],
+  jobTitle: "独立开发者",
   image: { "@type": "ImageObject", url: `${SITE_ORIGIN}${AVATAR.path}`, width: AVATAR.width, height: AVATAR.height },
-  description: "独立开发者。做 Windows 实时 AI 变声软件 Mintaria 萌音、Word 桌面印章 mignet 等软件和小工具，也在博客里写 AI、软件开发、音频与韩国生活。",
+  description: "独立开发者。做 Windows 实时 AI 变声软件 Mintaria 萌音、人声 VST3 插件 Mintaria Pantheon、直播混音声卡机架 Melorb、Word 桌面印章 mignet 等软件和小工具，也在博客里写 AI、软件开发、音频与韩国生活。",
   email: "mailto:me@mintryu.com",
-  knowsAbout: ["C++", "JUCE", "音频插件开发", "实时 AI 语音", "AI 应用", "音乐", "摄影"],
+  knowsAbout: ["C++", "JUCE", "VST3", "音频插件开发", "实时 AI 语音", "AI 应用", "音乐", "摄影"],
   sameAs: ["https://x.com/Ryusoohow", "https://www.youtube.com/@mint8733", "https://github.com/ysuhao"]
 };
 
@@ -35,6 +36,10 @@ const PROJECTS = [
   {
     links: ["https://mintaria.mintryu.com/android/"],
     entity: { "@type": "MobileApplication", "@id": "https://mintaria.mintryu.com/android/#app", name: "Mintaria Mobile（Mintaria 安卓版）", url: "https://mintaria.mintryu.com/android/", applicationCategory: "MultimediaApplication", operatingSystem: "Android 8.0+", description: "安卓手机上的录音变声 App：录一段话，在手机里变成另一个声音再播放，方便发微信、QQ 语音。不用 root，声音只在手机里处理。一次买断，与电脑版分开购买。" }
+  },
+  {
+    links: ["https://vst.mintryu.com/"],
+    entity: { "@type": "SoftwareApplication", "@id": "https://vst.mintryu.com/#app", name: "Mintaria Pantheon", url: "https://vst.mintryu.com/", applicationCategory: "MultimediaApplication", description: "十一款面向人声和直播实时使用的 VST3 插件，其中九款默认 0 采样延迟。" }
   },
   {
     links: ["https://mignet.mintryu.com/"],
@@ -169,7 +174,8 @@ async function llmsTxt(env) {
   const projectLines = [
     "- [Mintaria 萌音](https://mintaria.mintryu.com/)：免费的 Windows 本地实时 AI 变声软件，声音在本机处理、不上传；版本、音色、价格与下载以官网为准，详见 https://mintaria.mintryu.com/llms.txt",
     "- [Mintaria Mobile（安卓版）](https://mintaria.mintryu.com/android/)：安卓手机上的录音变声 App，录一段话在手机里换个声音，方便发微信、QQ 语音；不用 root，声音只在手机里处理，一次买断，与电脑版分开购买",
-    "- [mignet](https://mignet.mintryu.com/)：常驻 Windows 桌面的实体印章，在 Word 文档上拿起、瞄准、单击落章；免费下载，GPLv3 开源（https://github.com/ysuhao/mignet）",
+    "- [Mintaria Pantheon](https://vst.mintryu.com/)：11 款免费开源（AGPL-3.0）人声 VST3 插件，面向直播和实时人声，其中 9 款默认 0 采样延迟，详见 https://vst.mintryu.com/llms.txt",
+    "- [mignet（程序名 DesktopStamp）](https://mignet.mintryu.com/)：常驻 Windows 桌面的实体印章，用来在 Word 里盖电子章：拿起、瞄准、单击落章；免费下载，GPLv3 开源（https://github.com/ysuhao/mignet）",
     "- [Melorb 弥洛](https://melorb.mintryu.com/)：开发中的 Windows 直播混音声卡机架，用 Stream 与 Monitor 母泡分开观众和自己听到的混音；尚未开放下载，详见 https://melorb.mintryu.com/llms.txt",
     "- [Mint 同传](https://live.mintryu.com/)：韩语与普通话双向实时语音同传，扫码收听与查看字幕",
     `- [HANSA 韩学事](${SITE_ORIGIN}/works/hansa/)：为高丽大学首尔与世宗校区留学生整理学校公告、课表、作业和 A 饭记账的 Android 校园助手`,
@@ -195,7 +201,9 @@ async function llmsTxt(env) {
     "English: mintryu.com is the personal site and blog of indie developer Mint Ryu. It links to Mint's software (the Windows real-time AI voice changer Mintaria and the Word desktop stamp mignet, among others) and hosts Chinese-language articles on AI, software, audio and life in Korea, many with Traditional Chinese, Korean and English translations.",
     "",
     "## 作者",
-    "- 名字：Mint Ryu（也写作 Mint、MINT RYU）",
+    "- 名字：Mint Ryu（也写作 Mint、MINT RYU），独立开发者",
+    `- 实体 ID：${PERSON_ID}`,
+    `- 头像：${SITE_ORIGIN}${AVATAR.path}`,
     `- 主页：${SITE_ORIGIN}/`,
     "- 邮箱：me@mintryu.com、2025461029@korea.edu",
     "- X：https://x.com/Ryusoohow ；YouTube：https://www.youtube.com/@mint8733 ；GitHub：https://github.com/ysuhao",
