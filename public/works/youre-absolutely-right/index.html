@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#070a1f">
+  <title>You're Absolutely Right · Official MV — Mint Ryu</title>
+  <meta name="description" content="Mint 的 AI 音乐 MV《You're Absolutely Right》：Gemini 演唱，Claude 执导，MiniMax H3 摄影。它永远说你对，直到额度用完。">
+  <meta property="og:title" content="You're Absolutely Right · Official Music Video">
+  <meta property="og:description" content="Mint 的 AI 音乐 MV《You're Absolutely Right》：Gemini 演唱，Claude 执导，MiniMax H3 摄影。它永远说你对，直到额度用完。">
+  <meta property="og:type" content="video.other">
+  <meta property="og:image" content="https://mintryu.com/works/youre-absolutely-right/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675">
+  <meta property="og:image:alt" content="Mint 站在橙色像素 Clawd 舞台前，粉青色差大字 You're Absolutely Right">
+  <meta property="og:video" content="https://www.youtube.com/embed/s7uULu5-wjE">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --night: #070a1f;
+      --pink: #ff5fa2;
+      --cyan: #5ae6ff;
+      --orange: #e2825a;
+      --gold: #eccd8c;
+      --white: #f8f7f2;
+      --display: "Anton", Impact, sans-serif;
+      --sans: "Space Grotesk", "Bahnschrift", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+      --serif: "Cormorant Garamond", Georgia, serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: clip;
+      color: var(--white);
+      background: var(--night);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { padding: 0; border: 0; color: inherit; background: none; font: inherit; cursor: pointer; }
+    img, svg { display: block; max-width: 100%; }
+    h1, p { margin: 0; }
+    :focus-visible { outline: 3px solid var(--cyan); outline-offset: 6px; }
+    ::selection { color: var(--night); background: var(--cyan); }
+    .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+    .hero {
+      position: relative;
+      min-height: max(560px, 100svh);
+      overflow: hidden;
+      isolation: isolate;
+      background: #0d1238;
+    }
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      object-position: 52% 50%;
+      animation: develop 20s ease-in-out infinite alternate;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(5, 7, 24, .88) 0%, rgba(5, 7, 24, .46) 43%, rgba(5, 7, 24, .04) 76%),
+        linear-gradient(0deg, var(--night) 0%, rgba(7, 10, 31, .5) 22%, transparent 62%);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(7, 10, 31, .46), transparent 25%);
+      pointer-events: none;
+    }
+    @keyframes develop {
+      from { transform: scale(1.025); }
+      to { transform: scale(1.1); }
+    }
+    .topbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 30px clamp(24px, 4.5vw, 72px);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .22em;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; }
+    .brand-clawd { width: 27px; height: auto; aspect-ratio: 6 / 5; }
+    .youtube { padding: 10px 0 10px 16px; }
+    .youtube:hover { color: var(--cyan); }
+
+    .hero-copy {
+      position: absolute;
+      left: clamp(24px, 4.5vw, 72px);
+      bottom: 108px;
+      width: calc(100% - clamp(48px, 9vw, 144px));
+    }
+    .release-labels { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-bottom: 24px; }
+    .release-labels span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .38em;
+      line-height: 1.5;
+    }
+    .release-labels span:last-child { color: var(--pink); }
+    .hero-title {
+      max-width: 1250px;
+      color: white;
+      font-family: var(--display);
+      font-size: clamp(64px, 9.1vw, 146px);
+      font-weight: 400;
+      letter-spacing: -.025em;
+      line-height: .9;
+      text-transform: uppercase;
+    }
+    .title-part { position: relative; z-index: 1; display: inline-block; }
+    .title-part::before, .title-part::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .title-part::before { color: var(--pink); transform: translate(-.025em, .018em); }
+    .title-part::after { color: var(--cyan); transform: translate(.025em, -.012em); }
+    .tagline { margin-top: 26px; font-size: clamp(16px, 1.45vw, 21px); font-weight: 500; letter-spacing: .08em; line-height: 1.6; }
+    .release-date { margin-top: 12px; color: var(--gold); font-size: 12px; font-weight: 500; letter-spacing: .18em; }
+    .play-mv {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      margin-top: 28px;
+      padding: 15px 25px;
+      color: var(--night);
+      background: var(--pink);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .13em;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .play-mv:hover { background: var(--cyan); transform: translateY(-2px); }
+
+    .marquee {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 58px;
+      overflow: hidden;
+      color: var(--night);
+      background: var(--pink);
+      font-family: var(--display);
+      font-size: 29px;
+      line-height: 58px;
+      white-space: nowrap;
+    }
+    .marquee-track { display: flex; width: max-content; animation: marquee 24s linear infinite; }
+    .marquee-group { display: flex; flex-shrink: 0; }
+    .marquee-group span { display: block; padding-right: .55em; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    .mv-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100svh;
+      padding: 48px clamp(24px, 4.5vw, 72px);
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(90, 230, 255, .08), transparent 35%),
+        var(--night);
+    }
+    .mv-inner { width: min(1320px, 100%); margin-inline: auto; }
+    .mv-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(210px, 1fr); align-items: center; gap: 48px; }
+    .player { position: relative; align-self: start; aspect-ratio: 16 / 9; overflow: hidden; background: #02030a; }
+    .player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .poster { position: absolute; inset: 0; display: block; width: 100%; height: 100%; overflow: hidden; }
+    .poster img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease, filter .3s ease; }
+    .poster:hover img { transform: scale(1.025); filter: brightness(.8); }
+    .play-disc {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: grid;
+      place-items: center;
+      width: clamp(48px, 7vw, 92px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: rgba(7, 10, 31, .76);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, .8), 0 0 0 8px rgba(255, 95, 162, .18);
+      transform: translate(-50%, -50%);
+      transition: background .2s ease;
+    }
+    .play-disc svg { width: 30%; height: auto; aspect-ratio: 32 / 36; margin-left: 6%; fill: white; }
+    .poster:hover .play-disc { background: var(--pink); }
+
+    .credits { display: grid; gap: 26px; align-self: center; }
+    .credit-role { font-size: 10px; font-weight: 500; letter-spacing: .24em; line-height: 1.5; }
+    .credit-name {
+      margin-top: 5px;
+      color: var(--gold);
+      font-family: var(--serif);
+      font-size: clamp(30px, 2.7vw, 40px);
+      font-style: italic;
+      font-variant-numeric: lining-nums;
+      font-weight: 500;
+      line-height: 1;
+      overflow-wrap: anywhere;
+    }
+
+    .concept-strip { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin-top: 36px; }
+    .concept { position: relative; display: block; align-self: start; min-width: 0; overflow: hidden; text-align: left; }
+    .concept-media { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: #10152f; }
+    .concept img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease, filter .3s ease; }
+    .concept-time {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      display: block;
+      padding: 4px 6px;
+      color: white;
+      background: rgba(7, 10, 31, .82);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      line-height: 1;
+    }
+    .concept:hover img { transform: scale(1.05); filter: saturate(1.15); }
+    .concept[aria-pressed="true"] .concept-media { box-shadow: inset 0 0 0 2px var(--pink); }
+    .concept[aria-pressed="true"] .concept-time { color: var(--night); background: var(--cyan); }
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: min(1320px, 100%);
+      margin: 28px auto 0;
+      color: #aeb8d2;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      line-height: 1.5;
+    }
+    .footer a:hover { color: var(--cyan); }
+
+    @media (max-width: 1000px) {
+      /* Stacked layout: the section takes its content height instead of a padded full screen. */
+      .mv-section { min-height: 0; justify-content: flex-start; padding-block: 56px 40px; }
+      .mv-layout { grid-template-columns: 1fr; gap: 28px; }
+      .credits { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+      .credit-name { font-size: 32px; }
+      .concept-strip { margin-top: 30px; }
+    }
+    @media (max-width: 600px) {
+      .hero-photo { object-position: 53% 50%; }
+      .hero::before {
+        background:
+          linear-gradient(90deg, rgba(5, 7, 24, .28), rgba(5, 7, 24, .08)),
+          linear-gradient(0deg, var(--night) 0%, rgba(7, 10, 31, .82) 30%, rgba(7, 10, 31, .08) 68%);
+      }
+      .topbar { padding: 22px 20px; font-size: 11px; }
+      .brand { gap: 9px; }
+      .brand-clawd { width: 23px; }
+      .hero-copy { left: 20px; bottom: 88px; width: calc(100% - 40px); }
+      .release-labels { gap: 10px 20px; margin-bottom: 20px; }
+      .release-labels span { font-size: 9px; letter-spacing: .3em; }
+      .hero-title { font-size: 13vw; line-height: .94; }
+      .title-part { display: block; width: max-content; max-width: 100%; }
+      .tagline { margin-top: 22px; font-size: 15px; letter-spacing: .03em; }
+      .release-date { margin-top: 10px; font-size: 10px; }
+      .play-mv { min-height: 46px; margin-top: 22px; padding: 12px 20px; font-size: 11px; }
+      .marquee { height: 48px; font-size: 24px; line-height: 48px; }
+      .mv-section { padding: 32px 16px; }
+      .mv-layout { gap: 26px; }
+      .credits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 16px; }
+      .credit-role { font-size: 9px; }
+      .credit-name { font-size: 32px; }
+      .concept-strip {
+        display: flex;
+        gap: 12px;
+        margin: 28px -16px 0;
+        padding: 0 16px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+      }
+      .concept-strip::-webkit-scrollbar { display: none; }
+      .concept { flex: 0 0 70vw; scroll-snap-align: start; }
+      .concept-media { aspect-ratio: 4 / 5; }
+      .concept-time { right: 10px; bottom: 10px; font-size: 11px; }
+      .footer { margin-top: 24px; font-size: 9px; letter-spacing: .12em; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .hero-photo { transform: scale(1.025); }
+      .marquee-track { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="clawd" viewBox="0 0 120 100">
+      <rect x="8" y="33" width="12" height="20" rx="1" fill="#c86c49"/>
+      <rect x="100" y="33" width="12" height="20" rx="1" fill="#c86c49"/>
+      <rect x="20" y="12" width="80" height="58" rx="2" fill="#e2825a"/>
+      <rect x="38" y="24" width="10" height="25" rx="3" fill="#10101a"/>
+      <rect x="72" y="24" width="10" height="25" rx="3" fill="#10101a"/>
+      <rect x="28" y="70" width="8" height="19" fill="#c86c49"/>
+      <rect x="48" y="70" width="8" height="19" fill="#e2825a"/>
+      <rect x="68" y="70" width="8" height="19" fill="#e2825a"/>
+      <rect x="88" y="70" width="8" height="19" fill="#c86c49"/>
+    </symbol>
+  </svg>
+
+  <header class="hero">
+    <img class="hero-photo" src="assets/14-finale.webp" width="1344" height="768" alt="烟花下的终场舞台，Mint 举手欢呼，身后是 Clawd 堆成的高塔" fetchpriority="high" decoding="async">
+    <nav class="topbar" aria-label="主导航">
+      <a class="brand" href="/" aria-label="Mint 主页">
+        <svg class="brand-clawd" viewBox="0 0 120 100" aria-hidden="true"><use href="#clawd"/></svg>
+        <span>MINT</span>
+      </a>
+      <a class="youtube" href="https://youtu.be/s7uULu5-wjE" target="_blank" rel="noopener noreferrer">YOUTUBE ↗</a>
+    </nav>
+
+    <div class="hero-copy">
+      <div class="release-labels"><span>MINT × CLAWD</span><span>NEW SINGLE</span></div>
+      <h1 class="hero-title" aria-label="You're Absolutely Right">
+        <span class="title-part" aria-hidden="true" data-text="YOU'RE ABSOLUTELY">YOU'RE ABSOLUTELY</span>
+        <span class="title-part" aria-hidden="true" data-text=" RIGHT"> RIGHT</span>
+      </h1>
+      <p class="tagline">它永远说你对，直到额度用完。</p>
+      <p class="release-date">2026.11.06 12:30 KST</p>
+      <button class="play-mv" id="play-mv" type="button" aria-label="播放 You're Absolutely Right MV">▶ PLAY MV</button>
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-group"><span>YOU'RE ABSOLUTELY RIGHT ✦ </span><span>YOU'RE ABSOLUTELY RIGHT ✦ </span><span>YOU'RE ABSOLUTELY RIGHT ✦ </span><span>YOU'RE ABSOLUTELY RIGHT ✦ </span></div>
+        <div class="marquee-group"><span>YOU'RE ABSOLUTELY RIGHT ✦ </span><span>YOU'RE ABSOLUTELY RIGHT ✦ </span><span>YOU'RE ABSOLUTELY RIGHT ✦ </span><span>YOU'RE ABSOLUTELY RIGHT ✦ </span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="mv-section" id="mv" aria-label="You're Absolutely Right MV">
+      <div class="mv-inner">
+        <div class="mv-layout">
+          <div class="player" id="player">
+            <button class="poster" id="poster" type="button" aria-label="播放 You're Absolutely Right MV">
+              <img src="assets/11-hook.webp" width="1344" height="768" alt="" loading="lazy" decoding="async">
+              <span class="play-disc" aria-hidden="true"><svg viewBox="0 0 32 36"><path d="M2 2 30 18 2 34Z"/></svg></span>
+            </button>
+          </div>
+          <div class="credits" aria-label="制作名单">
+            <div><p class="credit-role">PERFORMED BY</p><p class="credit-name">Gemini</p></div>
+            <div><p class="credit-role">DIRECTED BY</p><p class="credit-name">Claude</p></div>
+            <div><p class="credit-role">STARRING</p><p class="credit-name">Mint</p></div>
+            <div><p class="credit-role">CINEMATOGRAPHY</p><p class="credit-name">MiniMax H3</p></div>
+          </div>
+        </div>
+
+        <div class="concept-strip" aria-label="概念照">
+          <button class="concept" type="button" data-seek="11" aria-pressed="false" aria-label="0:11，霓虹舞台上 Mint 拿着麦克风唱歌"><span class="concept-media"><img src="assets/02-stage.webp" width="1344" height="768" loading="lazy" decoding="async" alt="霓虹舞台上 Mint 拿着麦克风唱歌，身后坐满一排排橙色 Clawd"><span class="concept-time">0:11</span></span></button>
+          <button class="concept" type="button" data-seek="19" aria-pressed="false" aria-label="0:19，Mint 比心微笑，Clawd 趴在她肩上"><span class="concept-media"><img src="assets/03-gates.webp" width="1344" height="768" loading="lazy" decoding="async" alt="Mint 比心微笑，Clawd 趴在她肩上，背后是一整面挂锁墙"><span class="concept-time">0:19</span></span></button>
+          <button class="concept" type="button" data-seek="53" aria-pressed="false" aria-label="0:53，白发教授凑到电竞椅上的 Mint 身边"><span class="concept-media"><img src="assets/07-coauthor.webp" width="1344" height="768" loading="lazy" decoding="async" alt="白发教授搓着手凑到电竞椅上的 Mint 身边，旁边屏幕上是 Clawd"><span class="concept-time">0:53</span></span></button>
+          <button class="concept" type="button" data-seek="65" aria-pressed="false" aria-label="1:05，Mint 握着绿色长刀，长翅膀的 Clawd 飞在一旁"><span class="concept-media"><img src="assets/09-genji.webp" width="1344" height="768" loading="lazy" decoding="async" alt="夜晚的楼顶，Mint 戴着遮阳帽握着发光的绿色长刀，长翅膀的 Clawd 飞在一旁"><span class="concept-time">1:05</span></span></button>
+          <button class="concept" type="button" data-seek="97" aria-pressed="false" aria-label="1:37，鱼眼镜头下 Clawd 的大特写"><span class="concept-media"><img src="assets/13-clawd-close.webp" width="1344" height="768" loading="lazy" decoding="async" alt="鱼眼镜头下 Clawd 的大特写，两只竖长的黑眼睛"><span class="concept-time">1:37</span></span></button>
+          <button class="concept" type="button" data-seek="122" aria-pressed="false" aria-label="2:02，额度用完后 Mint 噘着嘴"><span class="concept-media"><img src="assets/15-limit.webp" width="1344" height="768" loading="lazy" decoding="async" alt="额度用完后，Mint 站在暗下来的舞台上噘着嘴"><span class="concept-time">2:02</span></span></button>
+        </div>
+      </div>
+      <footer class="footer"><span>© 2026 MINT RYU</span><a href="/">mintryu.com</a></footer>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const player = document.getElementById('player');
+      const poster = document.getElementById('poster');
+      const playButton = document.getElementById('play-mv');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const origin = 'https://www.youtube-nocookie.com';
+      let frame = null;
+      let pendingSeek = 0;
+
+      function command(func, args = []) {
+        if (!frame || !frame.contentWindow) return;
+        frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args, id: 'yar-player' }), origin);
+      }
+
+      function revealPlayer(seconds) {
+        pendingSeek = seconds;
+        if (frame) {
+          command('seekTo', [seconds, true]);
+          command('playVideo');
+          return;
+        }
+
+        poster.hidden = true;
+        frame = document.createElement('iframe');
+        frame.id = 'yar-player';
+        frame.title = "You're Absolutely Right";
+        frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        frame.allowFullscreen = true;
+        frame.src = origin + '/embed/s7uULu5-wjE?autoplay=1&rel=0&playsinline=1&enablejsapi=1&origin=' + encodeURIComponent(location.origin) + (seconds > 0 ? '&start=' + seconds : '');
+        frame.addEventListener('load', () => {
+          frame.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 'yar-player' }), origin);
+          command('seekTo', [pendingSeek, true]);
+          command('playVideo');
+        });
+        player.appendChild(frame);
+      }
+
+      function scrollToPlayer() {
+        player.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'center' });
+      }
+
+      playButton.addEventListener('click', () => {
+        revealPlayer(0);
+        scrollToPlayer();
+      });
+      poster.addEventListener('click', () => revealPlayer(0));
+
+      document.querySelectorAll('.concept').forEach((button) => {
+        button.addEventListener('click', () => {
+          revealPlayer(Number(button.dataset.seek));
+          document.querySelectorAll('.concept').forEach((concept) => {
+            concept.setAttribute('aria-pressed', String(concept === button));
+          });
+          scrollToPlayer();
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
