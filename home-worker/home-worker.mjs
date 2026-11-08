@@ -42,6 +42,10 @@ const PROJECTS = [
     entity: { "@type": "SoftwareApplication", "@id": "https://vst.mintryu.com/#app", name: "Mintaria Pantheon", url: "https://vst.mintryu.com/", applicationCategory: "MultimediaApplication", description: "十一款面向人声和直播实时使用的 VST3 插件，其中九款默认 0 采样延迟。" }
   },
   {
+    links: ["https://minoise.mintryu.com/"],
+    entity: { "@type": "SoftwareApplication", "@id": "https://minoise.mintryu.com/#app", name: "minoise", url: "https://minoise.mintryu.com/", applicationCategory: "MultimediaApplication", operatingSystem: "Windows x64", isAccessibleForFree: true, description: "免费的 AI 人声降噪 VST3 插件：在本机把录音拆成说话声和背景声，用两个旋钮分别调整，不需要联网。" }
+  },
+  {
     links: ["https://mignet.mintryu.com/"],
     entity: { "@type": "SoftwareApplication", "@id": "https://mignet.mintryu.com/#app", name: "mignet", url: "https://mignet.mintryu.com/", applicationCategory: "BusinessApplication", operatingSystem: "Windows 10, Windows 11", isAccessibleForFree: true, license: "https://www.gnu.org/licenses/gpl-3.0.html", codeRepository: "https://github.com/ysuhao/mignet", description: "常驻 Windows 桌面的实体印章：在 Word 文档上拿起、瞄准、单击落章。免费下载，GPLv3 开源。" }
   },
@@ -180,6 +184,7 @@ async function llmsTxt(env) {
     "- [Mintaria 萌音](https://mintaria.mintryu.com/)：免费的 Windows 本地实时 AI 变声软件，声音在本机处理、不上传；版本、音色、价格与下载以官网为准，详见 https://mintaria.mintryu.com/llms.txt",
     "- [Mintaria Mobile（安卓版）](https://mintaria.mintryu.com/android/)：安卓手机上的录音变声 App，录一段话在手机里换个声音，方便发微信、QQ 语音；不用 root，声音只在手机里处理，一次买断，与电脑版分开购买",
     "- [Mintaria Pantheon](https://vst.mintryu.com/)：11 款免费开源（AGPL-3.0）人声 VST3 插件，面向直播和实时人声，其中 9 款默认 0 采样延迟，详见 https://vst.mintryu.com/llms.txt",
+    "- [minoise](https://minoise.mintryu.com/)：免费的 Windows x64 AI 人声降噪 VST3 插件，在本机把录音拆成说话声和背景声，用两个旋钮分别调整，不需要联网",
     "- [mignet（程序名 DesktopStamp）](https://mignet.mintryu.com/)：常驻 Windows 桌面的实体印章，用来在 Word 里盖电子章：拿起、瞄准、单击落章；免费下载，GPLv3 开源（https://github.com/ysuhao/mignet）",
     "- [Melorb 弥洛](https://melorb.mintryu.com/)：开发中的 Windows 直播混音声卡机架，用 Stream 与 Monitor 母泡分开观众和自己听到的混音；尚未开放下载，详见 https://melorb.mintryu.com/llms.txt",
     `- [You’re Absolutely Right（Official MV）](${SITE_ORIGIN}/works/youre-absolutely-right/)：MINT × CLAWD 的单曲 MV（1:35，中英双语字幕，2026-11-08 上线新版）；演唱 YuE2，MV 导演 Claude，出演 Mint，造型 Codex，摄影 MiniMax H3，听审 Gemini；YouTube：https://youtu.be/E-M6MykQq2w`,
