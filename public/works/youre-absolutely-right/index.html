@@ -4,60 +4,67 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#070a1f">
-  <title>You're Absolutely Right · Official MV — Mint Ryu</title>
-  <meta name="description" content="Mint 的 AI 音乐 MV《You're Absolutely Right》：Gemini 演唱，Claude 执导，MiniMax H3 摄影。它永远说你对，直到额度用完。">
-  <meta property="og:title" content="You're Absolutely Right · Official Music Video">
-  <meta property="og:description" content="Mint 的 AI 音乐 MV《You're Absolutely Right》：Gemini 演唱，Claude 执导，MiniMax H3 摄影。它永远说你对，直到额度用完。">
+  <meta name="theme-color" content="#080807">
+  <title>You're Absolutely Right · MINT × CLAWD</title>
+  <meta name="description" content="You're Absolutely Right · MINT × CLAWD · 它永远说你对，直到额度用完。">
+  <meta property="og:title" content="You're Absolutely Right · MINT × CLAWD">
+  <meta property="og:description" content="OFFICIAL MUSIC VIDEO · 1:35 · 2026.11.08">
   <meta property="og:type" content="video.other">
   <meta property="og:image" content="https://mintryu.com/works/youre-absolutely-right/assets/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="675">
-  <meta property="og:image:alt" content="Mint 站在橙色像素 Clawd 舞台前，粉青色差大字 You're Absolutely Right">
-  <meta property="og:video" content="https://www.youtube.com/embed/s7uULu5-wjE">
+  <meta property="og:image:alt" content="You're Absolutely Right · MINT × CLAWD">
+  <meta property="og:video" content="https://www.youtube-nocookie.com/embed/E-M6MykQq2w">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&amp;family=Space+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <style>
     :root {
-      --night: #070a1f;
-      --pink: #ff5fa2;
-      --cyan: #5ae6ff;
-      --orange: #e2825a;
-      --gold: #eccd8c;
-      --white: #f8f7f2;
-      --display: "Anton", Impact, sans-serif;
-      --sans: "Space Grotesk", "Bahnschrift", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
-      --serif: "Cormorant Garamond", Georgia, serif;
+      --black: #080807;
+      --soft-black: #10100e;
+      --ivory: #f2eee5;
+      --gold: #c9ab72;
+      --muted: #9d968a;
+      --pink: #e781a7;
+      --cyan: #78cfca;
+      --line: rgba(201, 171, 114, .32);
+      --serif: "Cormorant Garamond", "Songti SC", "SimSun", Georgia, serif;
+      --sans: "Space Grotesk", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
     }
+
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; background: var(--black); }
     body {
       margin: 0;
       overflow-x: clip;
-      color: var(--white);
-      background: var(--night);
+      color: var(--ivory);
+      background: var(--black);
       font-family: var(--sans);
       -webkit-font-smoothing: antialiased;
     }
+    body, main, section, header, footer, div { min-width: 0; }
     a { color: inherit; text-decoration: none; }
     button { padding: 0; border: 0; color: inherit; background: none; font: inherit; cursor: pointer; }
     img, svg { display: block; max-width: 100%; }
-    h1, p { margin: 0; }
-    :focus-visible { outline: 3px solid var(--cyan); outline-offset: 6px; }
-    ::selection { color: var(--night); background: var(--cyan); }
-    .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+    h1, h2, p { margin: 0; }
+    [hidden] { display: none !important; }
+    ::selection { color: var(--black); background: var(--gold); }
+    :focus-visible { outline: 2px solid var(--cyan); outline-offset: 5px; }
 
     .hero {
       position: relative;
-      min-height: max(560px, 100svh);
+      display: flex;
+      min-height: max(640px, 100svh);
       overflow: hidden;
       isolation: isolate;
-      background: #0d1238;
+      align-items: flex-end;
+      justify-content: center;
+      border-bottom: 1px solid var(--line);
+      background: #090a09;
     }
     .hero-photo {
       position: absolute;
@@ -67,8 +74,9 @@
       height: 100%;
       max-width: none;
       object-fit: cover;
-      object-position: 52% 50%;
-      animation: develop 20s ease-in-out infinite alternate;
+      object-position: 50% 50%;
+      transform: translate3d(0, var(--drift, 0px), 0) scale(1.04);
+      will-change: transform;
     }
     .hero::before {
       content: "";
@@ -76,20 +84,17 @@
       inset: 0;
       z-index: -2;
       background:
-        linear-gradient(90deg, rgba(5, 7, 24, .88) 0%, rgba(5, 7, 24, .46) 43%, rgba(5, 7, 24, .04) 76%),
-        linear-gradient(0deg, var(--night) 0%, rgba(7, 10, 31, .5) 22%, transparent 62%);
+        linear-gradient(180deg, rgba(4, 4, 3, .66) 0%, transparent 23%, transparent 34%, rgba(5, 5, 4, .5) 51%, rgba(8, 8, 7, .96) 88%),
+        linear-gradient(90deg, rgba(0, 0, 0, .24), transparent 35%, transparent 65%, rgba(0, 0, 0, .24));
+      pointer-events: none;
     }
     .hero::after {
       content: "";
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: linear-gradient(180deg, rgba(7, 10, 31, .46), transparent 25%);
+      box-shadow: inset 0 0 160px rgba(0, 0, 0, .62);
       pointer-events: none;
-    }
-    @keyframes develop {
-      from { transform: scale(1.025); }
-      to { transform: scale(1.1); }
     }
     .topbar {
       position: absolute;
@@ -99,305 +104,471 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      padding: 30px clamp(24px, 4.5vw, 72px);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: .22em;
-    }
-    .brand { display: inline-flex; align-items: center; gap: 12px; }
-    .brand-clawd { width: 27px; height: auto; aspect-ratio: 6 / 5; }
-    .youtube { padding: 10px 0 10px 16px; }
-    .youtube:hover { color: var(--cyan); }
-
-    .hero-copy {
-      position: absolute;
-      left: clamp(24px, 4.5vw, 72px);
-      bottom: 108px;
-      width: calc(100% - clamp(48px, 9vw, 144px));
-    }
-    .release-labels { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-bottom: 24px; }
-    .release-labels span {
+      padding: 28px clamp(24px, 4.5vw, 72px);
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: .38em;
-      line-height: 1.5;
+      letter-spacing: .26em;
     }
-    .release-labels span:last-child { color: var(--pink); }
-    .hero-title {
-      max-width: 1250px;
-      color: white;
-      font-family: var(--display);
-      font-size: clamp(64px, 9.1vw, 146px);
-      font-weight: 400;
-      letter-spacing: -.025em;
-      line-height: .9;
-      text-transform: uppercase;
-    }
-    .title-part { position: relative; z-index: 1; display: inline-block; }
-    .title-part::before, .title-part::after {
-      content: attr(data-text);
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-    }
-    .title-part::before { color: var(--pink); transform: translate(-.025em, .018em); }
-    .title-part::after { color: var(--cyan); transform: translate(.025em, -.012em); }
-    .tagline { margin-top: 26px; font-size: clamp(16px, 1.45vw, 21px); font-weight: 500; letter-spacing: .08em; line-height: 1.6; }
-    .release-date { margin-top: 12px; color: var(--gold); font-size: 12px; font-weight: 500; letter-spacing: .18em; }
-    .play-mv {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 52px;
-      margin-top: 28px;
-      padding: 15px 25px;
-      color: var(--night);
-      background: var(--pink);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .13em;
-      transition: background .2s ease, transform .2s ease;
-    }
-    .play-mv:hover { background: var(--cyan); transform: translateY(-2px); }
-
-    .marquee {
+    .topbar a { position: relative; padding-block: 10px; }
+    .topbar a::after {
+      content: "";
       position: absolute;
       right: 0;
-      bottom: 0;
+      bottom: 4px;
       left: 0;
-      height: 58px;
-      overflow: hidden;
-      color: var(--night);
-      background: var(--pink);
-      font-family: var(--display);
-      font-size: 29px;
-      line-height: 58px;
-      white-space: nowrap;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform .25s ease;
     }
-    .marquee-track { display: flex; width: max-content; animation: marquee 24s linear infinite; }
-    .marquee-group { display: flex; flex-shrink: 0; }
-    .marquee-group span { display: block; padding-right: .55em; }
-    @keyframes marquee { to { transform: translateX(-50%); } }
+    .topbar a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .youtube { color: var(--gold); }
 
-    .mv-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 100svh;
-      padding: 48px clamp(24px, 4.5vw, 72px);
-      background:
-        radial-gradient(ellipse at 100% 0%, rgba(90, 230, 255, .08), transparent 35%),
-        var(--night);
+    .hero-copy {
+      width: min(1320px, calc(100% - 48px));
+      padding-bottom: clamp(42px, 6vh, 74px);
+      text-align: center;
     }
-    .mv-inner { width: min(1320px, 100%); margin-inline: auto; }
-    .mv-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(210px, 1fr); align-items: center; gap: 48px; }
-    .player { position: relative; align-self: start; aspect-ratio: 16 / 9; overflow: hidden; background: #02030a; }
+    .artist {
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .44em;
+      animation: entrance .8s .1s both;
+    }
+    .hero-title {
+      color: var(--ivory);
+      font-family: var(--serif);
+      font-size: clamp(72px, 9.4vw, 150px);
+      font-weight: 400;
+      letter-spacing: -.045em;
+      line-height: .77;
+      text-transform: uppercase;
+      text-shadow: -1px 0 rgba(231, 129, 167, .62), 1px 0 rgba(120, 207, 202, .52), 0 4px 35px rgba(0, 0, 0, .35);
+      animation: entrance 1.05s .2s both;
+    }
+    .title-row { display: block; }
+    .tagline {
+      margin-top: 28px;
+      font-family: var(--serif);
+      font-size: clamp(17px, 1.5vw, 22px);
+      letter-spacing: .12em;
+      line-height: 1.6;
+      animation: entrance .8s .4s both;
+    }
+    .release-meta {
+      margin-top: 12px;
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .23em;
+      line-height: 1.7;
+      animation: entrance .8s .5s both;
+    }
+    .watch {
+      display: inline-flex;
+      align-items: center;
+      gap: 22px;
+      min-height: 48px;
+      margin-top: 26px;
+      padding: 13px 22px;
+      border: 1px solid var(--gold);
+      color: var(--ivory);
+      background: rgba(8, 8, 7, .28);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .28em;
+      transition: color .25s ease, background .25s ease, border-color .25s ease;
+      animation: entrance .8s .6s both;
+    }
+    .watch svg { width: 12px; height: 12px; fill: currentColor; }
+    .watch:hover { border-color: var(--cyan); color: var(--black); background: var(--cyan); }
+    @keyframes entrance {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .screening {
+      display: flex;
+      align-items: center;
+      min-height: 100svh;
+      padding: clamp(72px, 9vh, 108px) clamp(24px, 4.5vw, 72px);
+      background:
+        linear-gradient(115deg, transparent 65%, rgba(120, 207, 202, .035) 65.1%, transparent 65.3%),
+        var(--black);
+    }
+    .section-inner { width: min(1320px, 100%); margin-inline: auto; }
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 34px;
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .3em;
+      line-height: 1.5;
+    }
+    .section-heading::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .section-number { color: var(--muted); letter-spacing: .12em; }
+    .screening-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.15fr) minmax(240px, .85fr);
+      align-items: start;
+      gap: clamp(34px, 4.5vw, 70px);
+    }
+    .player {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #030303;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, .32);
+    }
     .player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .poster { position: absolute; inset: 0; display: block; width: 100%; height: 100%; overflow: hidden; }
-    .poster img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease, filter .3s ease; }
-    .poster:hover img { transform: scale(1.025); filter: brightness(.8); }
-    .play-disc {
+    .poster { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; }
+    .poster::after {
+      content: "";
       position: absolute;
-      top: 50%;
-      left: 50%;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, .58));
+      pointer-events: none;
+    }
+    .poster img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s ease, filter .35s ease; }
+    .poster:hover img { transform: scale(1.025); filter: brightness(.78); }
+    .play-control {
+      position: absolute;
+      bottom: 28px;
+      left: 28px;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .28em;
+    }
+    .play-disc {
       display: grid;
       place-items: center;
-      width: clamp(48px, 7vw, 92px);
+      width: 52px;
       aspect-ratio: 1;
+      border: 1px solid rgba(242, 238, 229, .8);
       border-radius: 50%;
-      background: rgba(7, 10, 31, .76);
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, .8), 0 0 0 8px rgba(255, 95, 162, .18);
-      transform: translate(-50%, -50%);
-      transition: background .2s ease;
+      background: rgba(8, 8, 7, .5);
+      transition: color .25s ease, background .25s ease;
     }
-    .play-disc svg { width: 30%; height: auto; aspect-ratio: 32 / 36; margin-left: 6%; fill: white; }
-    .poster:hover .play-disc { background: var(--pink); }
+    .play-disc svg { width: 14px; height: 16px; margin-left: 3px; fill: currentColor; }
+    .poster:hover .play-disc { color: var(--black); background: var(--pink); border-color: var(--pink); }
 
-    .credits { display: grid; gap: 26px; align-self: center; }
-    .credit-role { font-size: 10px; font-weight: 500; letter-spacing: .24em; line-height: 1.5; }
-    .credit-name {
-      margin-top: 5px;
+    .credits-title {
+      margin-bottom: 20px;
       color: var(--gold);
-      font-family: var(--serif);
-      font-size: clamp(30px, 2.7vw, 40px);
-      font-style: italic;
-      font-variant-numeric: lining-nums;
+      font-size: 10px;
       font-weight: 500;
-      line-height: 1;
+      letter-spacing: .32em;
+    }
+    .credit { padding: 15px 0 17px; border-top: 1px solid var(--line); }
+    .credit:last-child { border-bottom: 1px solid var(--line); }
+    .credit-role { color: var(--muted); font-size: 9px; font-weight: 500; letter-spacing: .16em; line-height: 1.6; }
+    .credit-name {
+      margin-top: 3px;
+      color: var(--ivory);
+      font-family: var(--serif);
+      font-size: clamp(28px, 2.55vw, 40px);
+      font-weight: 500;
+      line-height: 1.05;
       overflow-wrap: anywhere;
     }
 
-    .concept-strip { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin-top: 36px; }
-    .concept { position: relative; display: block; align-self: start; min-width: 0; overflow: hidden; text-align: left; }
-    .concept-media { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: #10152f; }
-    .concept img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease, filter .3s ease; }
-    .concept-time {
-      position: absolute;
-      right: 8px;
-      bottom: 8px;
-      display: block;
-      padding: 4px 6px;
-      color: white;
-      background: rgba(7, 10, 31, .82);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: .1em;
-      line-height: 1;
+    .stills {
+      display: flex;
+      align-items: center;
+      min-height: 100svh;
+      overflow: hidden;
+      padding: clamp(72px, 9vh, 108px) clamp(24px, 4.5vw, 72px);
+      border-top: 1px solid rgba(201, 171, 114, .12);
+      border-bottom: 1px solid rgba(201, 171, 114, .12);
+      background: var(--soft-black);
     }
-    .concept:hover img { transform: scale(1.05); filter: saturate(1.15); }
-    .concept[aria-pressed="true"] .concept-media { box-shadow: inset 0 0 0 2px var(--pink); }
-    .concept[aria-pressed="true"] .concept-time { color: var(--night); background: var(--cyan); }
-    .footer {
+    .stills-rail {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+      max-width: 100%;
+      padding: 4px 1px 24px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x proximity;
+      scrollbar-color: var(--gold) rgba(201, 171, 114, .12);
+      scrollbar-width: thin;
+    }
+    .stills-rail::-webkit-scrollbar { height: 3px; }
+    .stills-rail::-webkit-scrollbar-track { background: rgba(201, 171, 114, .12); }
+    .stills-rail::-webkit-scrollbar-thumb { background: var(--gold); }
+    .still {
+      flex: 0 0 clamp(260px, 27vw, 400px);
+      min-width: 0;
+      scroll-snap-align: start;
+      text-align: left;
+    }
+    .still-media { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: #181816; }
+    .still-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1px solid transparent;
+      transition: border-color .25s ease;
+      pointer-events: none;
+    }
+    .still img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease, filter .3s ease; }
+    .still:hover img { transform: scale(1.035); filter: saturate(1.08); }
+    .still:hover .still-media::after, .still[aria-pressed="true"] .still-media::after { border-color: var(--cyan); }
+    .still-caption {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
-      width: min(1320px, 100%);
-      margin: 28px auto 0;
-      color: #aeb8d2;
+      gap: 16px;
+      padding-top: 13px;
+      color: var(--gold);
       font-size: 10px;
       font-weight: 500;
-      letter-spacing: .18em;
-      line-height: 1.5;
+      letter-spacing: .2em;
     }
-    .footer a:hover { color: var(--cyan); }
+    .still-index { color: var(--muted); }
+    .still[aria-pressed="true"] .still-caption { color: var(--cyan); }
 
-    @media (max-width: 1000px) {
-      /* Stacked layout: the section takes its content height instead of a padded full screen. */
-      .mv-section { min-height: 0; justify-content: flex-start; padding-block: 56px 40px; }
-      .mv-layout { grid-template-columns: 1fr; gap: 28px; }
-      .credits { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
-      .credit-name { font-size: 32px; }
-      .concept-strip { margin-top: 30px; }
+    .finale {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 68svh;
+      padding: 84px 24px 30px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(201, 171, 114, .07), transparent 48%),
+        var(--black);
     }
+    .finale-line { width: 1px; height: 58px; margin-bottom: 34px; background: var(--gold); }
+    .finale-quote {
+      max-width: 900px;
+      font-family: var(--serif);
+      font-size: clamp(27px, 3.1vw, 46px);
+      font-weight: 400;
+      letter-spacing: .12em;
+      line-height: 1.55;
+    }
+    .footer {
+      width: 100%;
+      margin-top: auto;
+      padding-top: 80px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: .24em;
+      line-height: 1.6;
+    }
+    .footer a { transition: color .2s ease; }
+    .footer a:hover { color: var(--pink); }
+
+    @media (max-width: 960px) {
+      .screening { min-height: 0; }
+      .screening-layout { grid-template-columns: 1fr; }
+      .credits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; }
+      .credits-title { grid-column: 1 / -1; }
+      .credit-name { font-size: 34px; }
+      .stills { min-height: 0; }
+    }
+
     @media (max-width: 600px) {
-      .hero-photo { object-position: 53% 50%; }
+      .hero { min-height: max(620px, 100svh); }
+      .hero-photo { object-position: 50% 50%; }
       .hero::before {
         background:
-          linear-gradient(90deg, rgba(5, 7, 24, .28), rgba(5, 7, 24, .08)),
-          linear-gradient(0deg, var(--night) 0%, rgba(7, 10, 31, .82) 30%, rgba(7, 10, 31, .08) 68%);
+          linear-gradient(180deg, rgba(4, 4, 3, .62) 0%, transparent 22%, transparent 34%, rgba(5, 5, 4, .45) 48%, rgba(8, 8, 7, .97) 85%),
+          linear-gradient(90deg, rgba(0, 0, 0, .14), transparent 50%, rgba(0, 0, 0, .14));
       }
-      .topbar { padding: 22px 20px; font-size: 11px; }
-      .brand { gap: 9px; }
-      .brand-clawd { width: 23px; }
-      .hero-copy { left: 20px; bottom: 88px; width: calc(100% - 40px); }
-      .release-labels { gap: 10px 20px; margin-bottom: 20px; }
-      .release-labels span { font-size: 9px; letter-spacing: .3em; }
-      .hero-title { font-size: 13vw; line-height: .94; }
-      .title-part { display: block; width: max-content; max-width: 100%; }
-      .tagline { margin-top: 22px; font-size: 15px; letter-spacing: .03em; }
-      .release-date { margin-top: 10px; font-size: 10px; }
-      .play-mv { min-height: 46px; margin-top: 22px; padding: 12px 20px; font-size: 11px; }
-      .marquee { height: 48px; font-size: 24px; line-height: 48px; }
-      .mv-section { padding: 32px 16px; }
-      .mv-layout { gap: 26px; }
-      .credits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 16px; }
-      .credit-role { font-size: 9px; }
-      .credit-name { font-size: 32px; }
-      .concept-strip {
-        display: flex;
-        gap: 12px;
-        margin: 28px -16px 0;
-        padding: 0 16px;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none;
-      }
-      .concept-strip::-webkit-scrollbar { display: none; }
-      .concept { flex: 0 0 70vw; scroll-snap-align: start; }
-      .concept-media { aspect-ratio: 4 / 5; }
-      .concept-time { right: 10px; bottom: 10px; font-size: 11px; }
-      .footer { margin-top: 24px; font-size: 9px; letter-spacing: .12em; }
+      .hero::after { box-shadow: inset 0 0 70px rgba(0, 0, 0, .45); }
+      .topbar { padding: 20px; font-size: 10px; }
+      .hero-copy { width: calc(100% - 40px); padding-bottom: 38px; }
+      .artist { margin-bottom: 15px; font-size: 9px; letter-spacing: .36em; }
+      .hero-title { font-size: clamp(42px, 14.5vw, 64px); line-height: .84; letter-spacing: -.04em; }
+      .title-row { display: contents; }
+      .title-word { display: block; }
+      .tagline { margin-top: 21px; font-size: 16px; letter-spacing: .06em; }
+      .release-meta { max-width: 310px; margin: 10px auto 0; font-size: 8px; letter-spacing: .18em; }
+      .watch { min-height: 44px; margin-top: 20px; padding: 11px 18px; font-size: 10px; }
+      .screening, .stills { padding: 64px 20px; }
+      .section-heading { gap: 12px; margin-bottom: 24px; font-size: 8px; letter-spacing: .22em; }
+      .screening-layout { gap: 34px; }
+      .play-control { bottom: 16px; left: 16px; gap: 10px; font-size: 9px; }
+      .play-disc { width: 42px; }
+      .credits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
+      .credits-title { margin-bottom: 16px; font-size: 9px; }
+      .credit { padding: 13px 0 14px; }
+      .credit-role { font-size: 8px; letter-spacing: .1em; }
+      .credit-name { margin-top: 5px; font-size: 30px; }
+      .stills-rail { gap: 12px; padding-bottom: 20px; scroll-snap-type: x mandatory; }
+      .still { flex-basis: min(78vw, 320px); }
+      .still-caption { font-size: 9px; }
+      .finale { min-height: 62svh; padding: 68px 20px 26px; }
+      .finale-quote { font-size: 27px; letter-spacing: .07em; }
+      .footer { padding-top: 64px; font-size: 8px; letter-spacing: .16em; }
     }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-      .hero-photo { transform: scale(1.025); }
-      .marquee-track { transform: none; }
+      .hero-photo { transform: scale(1.04); will-change: auto; }
     }
   </style>
 </head>
 <body>
-  <svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-    <symbol id="clawd" viewBox="0 0 120 100">
-      <rect x="8" y="33" width="12" height="20" rx="1" fill="#c86c49"/>
-      <rect x="100" y="33" width="12" height="20" rx="1" fill="#c86c49"/>
-      <rect x="20" y="12" width="80" height="58" rx="2" fill="#e2825a"/>
-      <rect x="38" y="24" width="10" height="25" rx="3" fill="#10101a"/>
-      <rect x="72" y="24" width="10" height="25" rx="3" fill="#10101a"/>
-      <rect x="28" y="70" width="8" height="19" fill="#c86c49"/>
-      <rect x="48" y="70" width="8" height="19" fill="#e2825a"/>
-      <rect x="68" y="70" width="8" height="19" fill="#e2825a"/>
-      <rect x="88" y="70" width="8" height="19" fill="#c86c49"/>
-    </symbol>
-  </svg>
-
-  <header class="hero">
-    <img class="hero-photo" src="assets/14-finale.webp" width="1344" height="768" alt="烟花下的终场舞台，Mint 举手欢呼，身后是 Clawd 堆成的高塔" fetchpriority="high" decoding="async">
-    <nav class="topbar" aria-label="主导航">
-      <a class="brand" href="/" aria-label="Mint 主页">
-        <svg class="brand-clawd" viewBox="0 0 120 100" aria-hidden="true"><use href="#clawd"/></svg>
-        <span>MINT</span>
-      </a>
-      <a class="youtube" href="https://youtu.be/s7uULu5-wjE" target="_blank" rel="noopener noreferrer">YOUTUBE ↗</a>
+  <header class="hero" id="top">
+    <img class="hero-photo" src="assets/16-fireworks.webp" width="1344" height="756" alt="烟花下举手" loading="lazy" fetchpriority="high" decoding="async">
+    <nav class="topbar" aria-label="MINT · YOUTUBE">
+      <a href="/" aria-label="MINT">MINT</a>
+      <a class="youtube" href="https://youtu.be/E-M6MykQq2w" target="_blank" rel="noopener noreferrer">YOUTUBE ↗</a>
     </nav>
-
     <div class="hero-copy">
-      <div class="release-labels"><span>MINT × CLAWD</span><span>NEW SINGLE</span></div>
+      <p class="artist">MINT × CLAWD</p>
       <h1 class="hero-title" aria-label="You're Absolutely Right">
-        <span class="title-part" aria-hidden="true" data-text="YOU'RE ABSOLUTELY">YOU'RE ABSOLUTELY</span>
-        <span class="title-part" aria-hidden="true" data-text=" RIGHT"> RIGHT</span>
+        <span class="title-row"><span class="title-word">You're</span> <span class="title-word">Absolutely</span></span>
+        <span class="title-row"><span class="title-word">Right</span></span>
       </h1>
       <p class="tagline">它永远说你对，直到额度用完。</p>
-      <p class="release-date">2026.11.06 12:30 KST</p>
-      <button class="play-mv" id="play-mv" type="button" aria-label="播放 You're Absolutely Right MV">▶ PLAY MV</button>
-    </div>
-
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <div class="marquee-group"><span>YOU'RE ABSOLUTELY RIGHT ✦ </span><span>YOU'RE ABSOLUTELY RIGHT ✦ </span><span>YOU'RE ABSOLUTELY RIGHT ✦ </span><span>YOU'RE ABSOLUTELY RIGHT ✦ </span></div>
-        <div class="marquee-group"><span>YOU'RE ABSOLUTELY RIGHT ✦ </span><span>YOU'RE ABSOLUTELY RIGHT ✦ </span><span>YOU'RE ABSOLUTELY RIGHT ✦ </span><span>YOU'RE ABSOLUTELY RIGHT ✦ </span></div>
-      </div>
+      <p class="release-meta">OFFICIAL MUSIC VIDEO · 1:35 · 2026.11.08</p>
+      <button class="watch" id="watch" type="button">
+        <span>WATCH</span>
+        <svg viewBox="0 0 14 16" aria-hidden="true"><path d="M1 1 13 8 1 15Z"/></svg>
+      </button>
     </div>
   </header>
 
   <main>
-    <section class="mv-section" id="mv" aria-label="You're Absolutely Right MV">
-      <div class="mv-inner">
-        <div class="mv-layout">
+    <section class="screening" id="screening" aria-label="OFFICIAL MUSIC VIDEO">
+      <div class="section-inner">
+        <h2 class="section-heading"><span class="section-number">01</span><span>OFFICIAL MUSIC VIDEO</span></h2>
+        <div class="screening-layout">
           <div class="player" id="player">
-            <button class="poster" id="poster" type="button" aria-label="播放 You're Absolutely Right MV">
-              <img src="assets/11-hook.webp" width="1344" height="768" alt="" loading="lazy" decoding="async">
-              <span class="play-disc" aria-hidden="true"><svg viewBox="0 0 32 36"><path d="M2 2 30 18 2 34Z"/></svg></span>
+            <button class="poster" id="poster" type="button" aria-label="PLAY">
+              <img src="assets/14-hook.webp" width="1344" height="756" alt="指镜头唱 hook" loading="lazy" decoding="async">
+              <span class="play-control" aria-hidden="true">
+                <span class="play-disc"><svg viewBox="0 0 14 16"><path d="M1 1 13 8 1 15Z"/></svg></span>
+                <span>PLAY</span>
+              </span>
             </button>
           </div>
-          <div class="credits" aria-label="制作名单">
-            <div><p class="credit-role">PERFORMED BY</p><p class="credit-name">Gemini</p></div>
-            <div><p class="credit-role">DIRECTED BY</p><p class="credit-name">Claude</p></div>
-            <div><p class="credit-role">STARRING</p><p class="credit-name">Mint</p></div>
-            <div><p class="credit-role">CINEMATOGRAPHY</p><p class="credit-name">MiniMax H3</p></div>
+          <div class="credits" aria-label="CREDITS">
+            <h2 class="credits-title">CREDITS</h2>
+            <div class="credit"><p class="credit-role">PERFORMED BY · 演唱 ·</p><p class="credit-name">YuE2</p></div>
+            <div class="credit"><p class="credit-role">DIRECTED BY · MV导演 ·</p><p class="credit-name">Claude</p></div>
+            <div class="credit"><p class="credit-role">STARRING · 出演 ·</p><p class="credit-name">Mint</p></div>
+            <div class="credit"><p class="credit-role">STYLING · 造型 ·</p><p class="credit-name">Codex</p></div>
+            <div class="credit"><p class="credit-role">CINEMATOGRAPHY · 摄影 ·</p><p class="credit-name">MiniMax H3</p></div>
+            <div class="credit"><p class="credit-role">VOCAL QC · 听审 ·</p><p class="credit-name">Gemini</p></div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="concept-strip" aria-label="概念照">
-          <button class="concept" type="button" data-seek="11" aria-pressed="false" aria-label="0:11，霓虹舞台上 Mint 拿着麦克风唱歌"><span class="concept-media"><img src="assets/02-stage.webp" width="1344" height="768" loading="lazy" decoding="async" alt="霓虹舞台上 Mint 拿着麦克风唱歌，身后坐满一排排橙色 Clawd"><span class="concept-time">0:11</span></span></button>
-          <button class="concept" type="button" data-seek="19" aria-pressed="false" aria-label="0:19，Mint 比心微笑，Clawd 趴在她肩上"><span class="concept-media"><img src="assets/03-gates.webp" width="1344" height="768" loading="lazy" decoding="async" alt="Mint 比心微笑，Clawd 趴在她肩上，背后是一整面挂锁墙"><span class="concept-time">0:19</span></span></button>
-          <button class="concept" type="button" data-seek="53" aria-pressed="false" aria-label="0:53，白发教授凑到电竞椅上的 Mint 身边"><span class="concept-media"><img src="assets/07-coauthor.webp" width="1344" height="768" loading="lazy" decoding="async" alt="白发教授搓着手凑到电竞椅上的 Mint 身边，旁边屏幕上是 Clawd"><span class="concept-time">0:53</span></span></button>
-          <button class="concept" type="button" data-seek="65" aria-pressed="false" aria-label="1:05，Mint 握着绿色长刀，长翅膀的 Clawd 飞在一旁"><span class="concept-media"><img src="assets/09-genji.webp" width="1344" height="768" loading="lazy" decoding="async" alt="夜晚的楼顶，Mint 戴着遮阳帽握着发光的绿色长刀，长翅膀的 Clawd 飞在一旁"><span class="concept-time">1:05</span></span></button>
-          <button class="concept" type="button" data-seek="97" aria-pressed="false" aria-label="1:37，鱼眼镜头下 Clawd 的大特写"><span class="concept-media"><img src="assets/13-clawd-close.webp" width="1344" height="768" loading="lazy" decoding="async" alt="鱼眼镜头下 Clawd 的大特写，两只竖长的黑眼睛"><span class="concept-time">1:37</span></span></button>
-          <button class="concept" type="button" data-seek="122" aria-pressed="false" aria-label="2:02，额度用完后 Mint 噘着嘴"><span class="concept-media"><img src="assets/15-limit.webp" width="1344" height="768" loading="lazy" decoding="async" alt="额度用完后，Mint 站在暗下来的舞台上噘着嘴"><span class="concept-time">2:02</span></span></button>
+    <section class="stills" id="stills" aria-label="STILLS">
+      <div class="section-inner">
+        <h2 class="section-heading"><span class="section-number">02</span><span>STILLS</span></h2>
+        <div class="stills-rail">
+          <button class="still" type="button" data-seek="3" aria-pressed="false" aria-label="01 · 00:03 · 机房背影回头">
+            <span class="still-media"><img src="assets/01-intro.webp" width="1344" height="756" alt="机房背影回头" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">01</span><span>00:03</span></span>
+          </button>
+          <button class="still" type="button" data-seek="9" aria-pressed="false" aria-label="02 · 00:09 · 机房舞台群舞">
+            <span class="still-media"><img src="assets/02-dance.webp" width="1344" height="756" alt="机房舞台群舞" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">02</span><span>00:09</span></span>
+          </button>
+          <button class="still" type="button" data-seek="13" aria-pressed="false" aria-label="03 · 00:13 · 闸门解锁">
+            <span class="still-media"><img src="assets/03-gates.webp" width="1344" height="756" alt="闸门解锁" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">03</span><span>00:13</span></span>
+          </button>
+          <button class="still" type="button" data-seek="17" aria-pressed="false" aria-label="04 · 00:17 · 板书折成纸">
+            <span class="still-media"><img src="assets/04-lecture.webp" width="1344" height="756" alt="板书折成纸" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">04</span><span>00:17</span></span>
+          </button>
+          <button class="still" type="button" data-seek="23" aria-pressed="false" aria-label="05 · 00:23 · GPU 夜市档口">
+            <span class="still-media"><img src="assets/05-stall.webp" width="1344" height="756" alt="GPU 夜市档口" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">05</span><span>00:23</span></span>
+          </button>
+          <button class="still" type="button" data-seek="27" aria-pressed="false" aria-label="06 · 00:27 · 教授递信封她眨眼">
+            <span class="still-media"><img src="assets/06-envelope.webp" width="1344" height="756" alt="教授递信封她眨眼" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">06</span><span>00:27</span></span>
+          </button>
+          <button class="still" type="button" data-seek="31" aria-pressed="false" aria-label="07 · 00:31 · 电竞椅喝奶茶">
+            <span class="still-media"><img src="assets/07-review.webp" width="1344" height="756" alt="电竞椅喝奶茶" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">07</span><span>00:31</span></span>
+          </button>
+          <button class="still" type="button" data-seek="38" aria-pressed="false" aria-label="08 · 00:38 · 戴耳机打游戏">
+            <span class="still-media"><img src="assets/08-gaming.webp" width="1344" height="756" alt="戴耳机打游戏" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">08</span><span>00:38</span></span>
+          </button>
+          <button class="still" type="button" data-seek="46" aria-pressed="false" aria-label="09 · 00:46 · 教授凑过来哀求">
+            <span class="still-media"><img src="assets/09-prof.webp" width="1344" height="756" alt="教授凑过来哀求" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">09</span><span>00:46</span></span>
+          </button>
+          <button class="still" type="button" data-seek="50" aria-pressed="false" aria-label="10 · 00:50 · 指屏幕">
+            <span class="still-media"><img src="assets/10-point.webp" width="1344" height="756" alt="指屏幕" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">10</span><span>00:50</span></span>
+          </button>
+          <button class="still" type="button" data-seek="57" aria-pressed="false" aria-label="11 · 00:57 · 霓虹忍者冲刺">
+            <span class="still-media"><img src="assets/11-ninja.webp" width="1344" height="756" alt="霓虹忍者冲刺" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">11</span><span>00:57</span></span>
+          </button>
+          <button class="still" type="button" data-seek="64" aria-pressed="false" aria-label="12 · 01:04 · 收刀慢镜">
+            <span class="still-media"><img src="assets/12-sheathe.webp" width="1344" height="756" alt="收刀慢镜" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">12</span><span>01:04</span></span>
+          </button>
+          <button class="still" type="button" data-seek="73" aria-pressed="false" aria-label="13 · 01:13 · 白衣大舞台">
+            <span class="still-media"><img src="assets/13-chorus.webp" width="1344" height="756" alt="白衣大舞台" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">13</span><span>01:13</span></span>
+          </button>
+          <button class="still" type="button" data-seek="77" aria-pressed="false" aria-label="14 · 01:17 · 指镜头唱 hook">
+            <span class="still-media"><img src="assets/14-hook.webp" width="1344" height="756" alt="指镜头唱 hook" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">14</span><span>01:17</span></span>
+          </button>
+          <button class="still" type="button" data-seek="80" aria-pressed="false" aria-label="15 · 01:20 · 火箭升空烟花">
+            <span class="still-media"><img src="assets/15-liftoff.webp" width="1344" height="756" alt="火箭升空烟花" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">15</span><span>01:20</span></span>
+          </button>
+          <button class="still" type="button" data-seek="84" aria-pressed="false" aria-label="16 · 01:24 · 烟花下举手">
+            <span class="still-media"><img src="assets/16-fireworks.webp" width="1344" height="756" alt="烟花下举手" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">16</span><span>01:24</span></span>
+          </button>
+          <button class="still" type="button" data-seek="86" aria-pressed="false" aria-label="17 · 01:26 · 和 Clawd 齐喊">
+            <span class="still-media"><img src="assets/17-group.webp" width="1344" height="756" alt="和 Clawd 齐喊" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">17</span><span>01:26</span></span>
+          </button>
+          <button class="still" type="button" data-seek="89" aria-pressed="false" aria-label="18 · 01:29 · 黑场念白">
+            <span class="still-media"><img src="assets/18-outro.webp" width="1344" height="756" alt="黑场念白" loading="lazy" decoding="async"></span>
+            <span class="still-caption"><span class="still-index">18</span><span>01:29</span></span>
+          </button>
         </div>
       </div>
-      <footer class="footer"><span>© 2026 MINT RYU</span><a href="/">mintryu.com</a></footer>
     </section>
   </main>
+
+  <footer class="finale">
+    <div class="finale-line" aria-hidden="true"></div>
+    <p class="finale-quote">它永远说你对，直到额度用完。</p>
+    <p class="footer">© 2026 MINT RYU · <a href="/">mintryu.com</a></p>
+  </footer>
 
   <script>
     (() => {
       const player = document.getElementById('player');
       const poster = document.getElementById('poster');
-      const playButton = document.getElementById('play-mv');
+      const watch = document.getElementById('watch');
+      const stills = [...document.querySelectorAll('.still')];
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       const origin = 'https://www.youtube-nocookie.com';
       let frame = null;
@@ -422,7 +593,7 @@
         frame.title = "You're Absolutely Right";
         frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
         frame.allowFullscreen = true;
-        frame.src = origin + '/embed/s7uULu5-wjE?autoplay=1&rel=0&playsinline=1&enablejsapi=1&origin=' + encodeURIComponent(location.origin) + (seconds > 0 ? '&start=' + seconds : '');
+        frame.src = origin + '/embed/E-M6MykQq2w?autoplay=1&rel=0&playsinline=1&enablejsapi=1&origin=' + encodeURIComponent(location.origin) + (seconds > 0 ? '&start=' + seconds : '');
         frame.addEventListener('load', () => {
           frame.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 'yar-player' }), origin);
           command('seekTo', [pendingSeek, true]);
@@ -435,21 +606,33 @@
         player.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'center' });
       }
 
-      playButton.addEventListener('click', () => {
+      watch.addEventListener('click', () => {
         revealPlayer(0);
         scrollToPlayer();
       });
       poster.addEventListener('click', () => revealPlayer(0));
 
-      document.querySelectorAll('.concept').forEach((button) => {
+      stills.forEach((button) => {
         button.addEventListener('click', () => {
           revealPlayer(Number(button.dataset.seek));
-          document.querySelectorAll('.concept').forEach((concept) => {
-            concept.setAttribute('aria-pressed', String(concept === button));
-          });
+          stills.forEach((still) => still.setAttribute('aria-pressed', String(still === button)));
           scrollToPlayer();
         });
       });
+
+      if (!reduceMotion.matches) {
+        const heroPhoto = document.querySelector('.hero-photo');
+        let ticking = false;
+        const updateDrift = () => {
+          heroPhoto.style.setProperty('--drift', Math.min(20, window.scrollY * .025) + 'px');
+          ticking = false;
+        };
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > window.innerHeight || ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(updateDrift);
+        }, { passive: true });
+      }
     })();
   </script>
 </body>

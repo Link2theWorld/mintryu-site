@@ -50,8 +50,8 @@ const PROJECTS = [
     entity: { "@type": "SoftwareApplication", "@id": "https://melorb.mintryu.com/#app", name: "Melorb 弥洛", url: "https://melorb.mintryu.com/", applicationCategory: "MultimediaApplication", operatingSystem: "Windows", description: "开发中的 Windows 直播混音声卡机架：用 Stream 与 Monitor 母泡安排观众和自己听到的混音，每份分身有独立效果链。尚未开放下载。" }
   },
   {
-    links: [`${SITE_ORIGIN}/works/youre-absolutely-right/`, "https://youtu.be/s7uULu5-wjE"],
-    entity: { "@type": "VideoObject", "@id": `${SITE_ORIGIN}/works/youre-absolutely-right/#mv`, name: "You’re Absolutely Right（Official MV）", url: `${SITE_ORIGIN}/works/youre-absolutely-right/`, embedUrl: "https://www.youtube.com/embed/s7uULu5-wjE", sameAs: "https://www.youtube.com/watch?v=s7uULu5-wjE", thumbnailUrl: [`${SITE_ORIGIN}/works/youre-absolutely-right/assets/og.jpg`, "https://i.ytimg.com/vi/s7uULu5-wjE/maxresdefault.jpg"], uploadDate: "2026-11-05T19:30:39-08:00", duration: "PT2M15S", genre: "Music video", inLanguage: "zh-CN", isFamilyFriendly: true, description: "Mint 的单曲《You’re Absolutely Right》官方 MV：深夜机房里，Mint 和 Claude 一晚推翻百年猜想，直到 5 小时额度用完。演唱 Gemini，MV 导演 Claude，出演 Mint，摄影 MiniMax H3，中英双语字幕。" }
+    links: [`${SITE_ORIGIN}/works/youre-absolutely-right/`, "https://youtu.be/E-M6MykQq2w"],
+    entity: { "@type": "VideoObject", "@id": `${SITE_ORIGIN}/works/youre-absolutely-right/#mv`, name: "You’re Absolutely Right（Official MV）", url: `${SITE_ORIGIN}/works/youre-absolutely-right/`, embedUrl: "https://www.youtube.com/embed/E-M6MykQq2w", sameAs: "https://www.youtube.com/watch?v=E-M6MykQq2w", thumbnailUrl: [`${SITE_ORIGIN}/works/youre-absolutely-right/assets/og.jpg`, "https://i.ytimg.com/vi/E-M6MykQq2w/maxresdefault.jpg"], uploadDate: "2026-11-08T03:00:00+09:00", duration: "PT1M35S", genre: "Music video", inLanguage: "zh-CN", isFamilyFriendly: true, description: "MINT × CLAWD 单曲《You’re Absolutely Right》官方 MV：深夜机房里，Mint 和 Claude 一晚推翻百年猜想，直到 5 小时额度用完。演唱 YuE2，MV 导演 Claude，出演 Mint，造型 Codex，摄影 MiniMax H3，听审 Gemini，中英双语字幕。" }
   },
   {
     links: [`${SITE_ORIGIN}/works/hansa/`],
@@ -182,7 +182,7 @@ async function llmsTxt(env) {
     "- [Mintaria Pantheon](https://vst.mintryu.com/)：11 款免费开源（AGPL-3.0）人声 VST3 插件，面向直播和实时人声，其中 9 款默认 0 采样延迟，详见 https://vst.mintryu.com/llms.txt",
     "- [mignet（程序名 DesktopStamp）](https://mignet.mintryu.com/)：常驻 Windows 桌面的实体印章，用来在 Word 里盖电子章：拿起、瞄准、单击落章；免费下载，GPLv3 开源（https://github.com/ysuhao/mignet）",
     "- [Melorb 弥洛](https://melorb.mintryu.com/)：开发中的 Windows 直播混音声卡机架，用 Stream 与 Monitor 母泡分开观众和自己听到的混音；尚未开放下载，详见 https://melorb.mintryu.com/llms.txt",
-    `- [You’re Absolutely Right（Official MV）](${SITE_ORIGIN}/works/youre-absolutely-right/)：Mint 的单曲 MV（2:15，中英双语字幕，2026-11-06 上线）；演唱 Gemini，MV 导演 Claude，出演 Mint，摄影 MiniMax H3；YouTube：https://youtu.be/s7uULu5-wjE`,
+    `- [You’re Absolutely Right（Official MV）](${SITE_ORIGIN}/works/youre-absolutely-right/)：MINT × CLAWD 的单曲 MV（1:35，中英双语字幕，2026-11-08 上线新版）；演唱 YuE2，MV 导演 Claude，出演 Mint，造型 Codex，摄影 MiniMax H3，听审 Gemini；YouTube：https://youtu.be/E-M6MykQq2w`,
     "- [Mint 同传](https://live.mintryu.com/)：韩语与普通话双向实时语音同传，扫码收听与查看字幕",
     `- [HANSA 韩学事](${SITE_ORIGIN}/works/hansa/)：为高丽大学首尔与世宗校区留学生整理学校公告、课表、作业和 A 饭记账的 Android 校园助手`,
     `- [Mint Final Channel](${SITE_ORIGIN}/works/mint-final-channel/)：同时为直播新手和专业创作者设计的双模式 VST3 混音通道条（开发中）；0.1.0 Windows x64 版与 MIT 开源代码见 https://github.com/ysuhao/mint-final-channel`,
