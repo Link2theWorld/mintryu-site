@@ -1,0 +1,1179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor Data, Not People</title>
+<meta name="description" content="Korea University MIS, Team 8: employee monitoring in the age of generative AI. Shadow AI data, Korean court rulings, out-of-band monitoring, pseudonymisation and five IS recommendations. English slides with Chinese translation and speaker notes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<style>
+  :root {
+    --desk: #1b1c1f; --paper: #f4f1e8; --ink: #2b2b2e; --ink2: #4a4a50; --ink3: #85847f;
+    --blue: #1f4fd8; --blue2: #9db3ef; --blue3: #dfe6f8; --red: #c23b2c; --grid: #c9d3e6; --zh: #5d6584; --sticky: #fff3a8;
+    --track: #dedad0; --bar: 56px; --notes: 0px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { background: var(--desk); color: #e8e6e1; font-family: "IBM Plex Sans", system-ui, sans-serif; overflow: hidden; }
+
+  /* ---------- stage ---------- */
+  body.notes-on { --notes: 34vh; }
+  .stage { position: fixed; inset: 0 0 calc(var(--bar) + var(--notes)) 0; display: grid; place-items: center; padding: 16px; }
+  body.fs .stage { inset: 0 0 var(--notes) 0; padding: 0; }
+  .slide {
+    display: none; container-type: inline-size; position: relative; overflow: hidden;
+    width: min(calc(100vw - 32px), calc((100dvh - var(--bar) - var(--notes) - 32px) * 16 / 9));
+    aspect-ratio: 16 / 9; background: var(--paper); color: var(--ink);
+    border-radius: 6px; box-shadow: 0 12px 40px rgba(0,0,0,.45);
+  }
+  body.fs .slide { width: min(100vw, (100dvh - var(--notes)) * 16 / 9); border-radius: 0; }
+  .slide.on { display: block; animation: fade .22s ease; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  .slide::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+    background: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 2.2cqw 2.2cqw;
+  }
+  .pad {
+    --k: 1; position: absolute; inset: 0; padding: 3.4cqw 5cqw 3.9cqw;
+    display: flex; flex-direction: column;
+    font-family: "Patrick Hand", "Noto Sans SC", cursive; font-size: calc(1.65cqw * var(--k)); line-height: 1.25;
+  }
+  body.zh-on .pad { --k: .9; }
+  .foot {
+    position: absolute; left: 5cqw; right: 5cqw; bottom: 1.3cqw; display: flex; justify-content: space-between;
+    font: 400 .85cqw "IBM Plex Mono", monospace; color: var(--ink3); letter-spacing: .08em; text-transform: uppercase;
+  }
+
+  /* ---------- type ---------- */
+  .kicker { font: 500 .68em "IBM Plex Mono", monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); }
+  h1, h2, h3 { font-family: "Caveat", cursive; font-weight: 700; }
+  h1 { font-size: 4.5em; line-height: .98; margin-top: .25em; }
+  h2 { font-size: 2.5em; line-height: 1.02; margin-top: .15em; }
+  h3 { font-size: 1.4em; line-height: 1.05; }
+  .zh {
+    display: none; font-family: "Noto Sans SC", "PingFang SC", sans-serif; font-weight: 400;
+    color: var(--zh); font-size: .72em; line-height: 1.4; margin-top: .1em; letter-spacing: 0;
+  }
+  body.zh-on .zh { display: block; }
+  .zhi { display: none; font-family: "Noto Sans SC", "PingFang SC", sans-serif; color: var(--zh); font-size: .75em; margin-left: .5em; }
+  body.zh-on .zhi { display: inline; }
+  .chips-big .chip { font-size: 1.2em; display: flex; width: fit-content; margin: .5em 0; }
+  .chips-big .chip .zh { margin: 0 0 0 .4em; }
+  body.zh-on .chips-big .chip .zh { display: inline; }
+  .big-panel { font-size: 1.3em; }
+  .tiles-big { font-size: 1.2em; }
+  .tiles-big .ic { font-size: 2.4em; }
+  h1 .zh { font-size: .22em; margin-top: .5em; font-weight: 500; }
+  h2 .zh { font-size: .33em; margin-top: .25em; font-weight: 500; }
+  h3 .zh { font-size: .5em; margin-top: .1em; font-weight: 500; }
+  .lead { font-size: 1.3em; color: var(--ink2); margin-top: .9em; }
+  .say { font-family: "Caveat"; font-weight: 700; font-size: 1.9em; line-height: 1.08; }
+  .say .zh { font-size: .42em; font-weight: 400; }
+  .mark { position: relative; white-space: nowrap; }
+  .mark::after {
+    content: ""; position: absolute; left: -2%; right: -2%; bottom: .04em; height: .08em;
+    background: var(--blue); border-radius: 2px; transform: rotate(-.8deg); filter: url(#rough);
+  }
+  .blue { color: var(--blue); }
+  .red { color: var(--red); }
+  .src { font: 400 .55em "IBM Plex Mono", monospace; color: var(--ink3); margin-top: .8em; letter-spacing: .02em; }
+  .body { flex: 1; min-height: 0; margin-top: .9em; display: flex; flex-direction: column; gap: .9em; }
+  .grow { flex: 1; min-height: 0; }
+  .ti { line-height: 1; }
+
+  /* ---------- layout ---------- */
+  .cols { display: grid; gap: 1em; }
+  .c2 { grid-template-columns: 1fr 1fr; }
+  .c3 { grid-template-columns: repeat(3, 1fr); }
+  .c4 { grid-template-columns: repeat(4, 1fr); }
+  .c5 { grid-template-columns: repeat(5, 1fr); }
+  .center { align-items: center; }
+
+  /* ---------- pencil boxes ---------- */
+  .box { position: relative; padding: .65em .9em .75em; }
+  .box::before {
+    content: ""; position: absolute; inset: 0; border: 2px solid var(--ink); border-radius: 3px;
+    filter: url(#rough); pointer-events: none;
+  }
+  .box.b::before { border-color: var(--blue); }
+  .box.r::before { border-color: var(--red); }
+  .box.fill { background: rgba(255,255,255,.6); }
+  .tag {
+    display: inline-block; font: 500 .55em "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase;
+    padding: .2em .6em; border: 1.5px solid currentColor; border-radius: 99px; color: var(--blue);
+  }
+  .tag.r { color: var(--red); }
+  .tag.k { color: var(--ink2); }
+  .sticky {
+    background: var(--sticky); padding: .55em 1em .65em; transform: rotate(-.7deg);
+    box-shadow: 0 .2em .5em rgba(0,0,0,.13); font-size: 1.05em;
+  }
+  .sticky b { font-family: "Caveat"; font-weight: 700; font-size: 1.3em; margin-right: .15em; }
+  .chip {
+    display: inline-flex; align-items: center; gap: .35em; padding: .2em .6em; margin: .15em .2em .15em 0;
+    border: 1.5px solid #b9b6ad; border-radius: 99px; font-size: .9em; background: rgba(255,255,255,.55);
+  }
+  .chip .ti { color: var(--ink3); }
+  .lab { font: 500 .56em "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--ink3); }
+
+  /* ---------- photos ---------- */
+  .photo {
+    position: relative; background: #fff; padding: .45em .45em 1.6em; margin: 0;
+    box-shadow: 0 .25em .8em rgba(0,0,0,.2); transform: rotate(var(--rot, -1.5deg));
+  }
+  .photo::before {
+    content: ""; position: absolute; top: -.55em; left: 50%; width: 4.5em; height: 1.2em; z-index: 1;
+    transform: translateX(-50%) rotate(2deg); background: rgba(255,233,140,.78); box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  }
+  .photo .ph { aspect-ratio: var(--ar, 4 / 3); overflow: hidden; background: #ddd; }
+  .photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, center); filter: saturate(.8) contrast(1.03); }
+  .photo figcaption {
+    position: absolute; left: .6em; right: .6em; bottom: .2em; font: 700 1.1em "Caveat"; color: var(--ink2);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* ---------- charts ---------- */
+  svg.fig { width: 100%; height: auto; overflow: visible; display: block; }
+  .fig .ln { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; filter: url(#roughsvg); }
+  .fig .b { stroke: var(--blue); }
+  .fig .r { stroke: var(--red); }
+  .fig .g { stroke: #b9b6ad; }
+  .fig .d { stroke-dasharray: 7 7; }
+  .fig .fp { fill: var(--paper); }
+  .fig text { font-family: "Patrick Hand", cursive; font-size: 15px; fill: var(--ink); }
+  .fig text.m { font-family: "IBM Plex Mono", monospace; font-size: 11px; fill: var(--ink3); letter-spacing: .04em; }
+  .fig text.cv { font-family: "Caveat", cursive; font-weight: 700; font-size: 21px; }
+  .fig .tb { fill: var(--blue); }
+  .fig .tr { fill: var(--red); }
+  .waffle .on { fill: var(--blue); }
+  .waffle .off { fill: none; stroke: #b9b6ad; stroke-width: 1; }
+
+  .tile { display: flex; flex-direction: column; gap: .3em; }
+  .tile .row { display: flex; align-items: center; justify-content: space-between; gap: .6em; }
+  .big { font-family: "Caveat"; font-weight: 700; font-size: 3.1em; line-height: .9; color: var(--ink); }
+  .tile .mini { height: 4.4em; width: auto; flex: none; }
+  .tile .cap { font-size: .95em; }
+
+  .hb { display: grid; grid-template-columns: 17em 1fr 3.4em; align-items: center; gap: .75em 1em; }
+  .hb .lb { font-size: 1.05em; line-height: 1.15; }
+  .hb .tr { height: 1.25em; position: relative; }
+  .hb .tr::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1.5px dashed #c4c1b8; }
+  .hb .fl {
+    position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--v) * 1%); z-index: 1; border-radius: 0 4px 4px 0;
+    background: repeating-linear-gradient(-45deg, var(--blue) 0 2.5px, rgba(31,79,216,.25) 2.5px 6px);
+    border: 2px solid var(--blue); filter: url(#rough);
+  }
+  .hb .fl.hi { background: var(--blue); }
+  .hb .v { font: 700 1.55em "Caveat"; color: var(--ink); text-align: right; }
+  .hb.sm { grid-template-columns: 6.5em 1fr 2.6em; gap: .35em .6em; }
+  .hb.sm .lb { font-size: .9em; }
+  .hb.sm .tr { height: .9em; }
+  .hb.sm .v { font-size: 1.25em; }
+
+  /* ---------- per-slide ---------- */
+  .title-grid { flex: 1; display: grid; grid-template-columns: 1.35fr .65fr; gap: 3.5em; align-items: center; }
+  .agenda { display: flex; flex-wrap: wrap; gap: .3em 1.2em; margin-top: 1.6em; font-size: 1em; color: var(--ink2); }
+  .agenda b { font: 600 .7em "IBM Plex Mono", monospace; color: var(--blue); margin-right: .3em; }
+
+  .ilist { list-style: none; display: flex; flex-direction: column; gap: .75em; }
+  .ilist li { display: grid; grid-template-columns: 2.1em 1fr; gap: .4em; align-items: start; }
+  .ilist .ti { font-size: 1.55em; color: var(--blue); margin-top: .05em; }
+  .ilist b { font-family: "Caveat"; font-weight: 700; font-size: 1.3em; display: block; line-height: 1; }
+
+  .lane { display: grid; grid-template-columns: 12.5em 1fr; gap: 2em; align-items: center; }
+  .track3 { display: grid; grid-template-columns: repeat(3, 1fr); position: relative; }
+  .track3::before { content: ""; position: absolute; left: 1em; right: 1em; top: 2.15em; border-top: 2px solid var(--ink); filter: url(#rough); }
+  .stop { position: relative; padding-right: 1em; }
+  .stop .yr { font: 700 1.3em "Caveat"; color: var(--ink3); line-height: 1; height: 1.15em; }
+  .stop .dot { width: 1.05em; height: 1.05em; border-radius: 50%; background: var(--paper); border: 2.5px solid var(--ink); margin: .35em 0 .45em; position: relative; z-index: 1; }
+  .stop .dot.r { background: var(--red); border-color: var(--red); }
+  .stop .dot.b { background: var(--blue); border-color: var(--blue); }
+  .stop .t { font-size: 1em; line-height: 1.15; }
+
+  .card { display: flex; flex-direction: column; gap: .55em; }
+  .iconart { aspect-ratio: 16 / 10; display: grid; place-items: center; background: #fff; box-shadow: 0 .25em .8em rgba(0,0,0,.2); transform: rotate(1deg); padding: .45em .45em 1.6em; position: relative; }
+  .iconart .in { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; gap: .25em; background: var(--blue3); font-size: 3.2em; color: var(--blue); }
+  .iconart figcaption { position: absolute; left: .6em; bottom: .2em; font: 700 1.1em "Caveat"; color: var(--ink2); }
+
+  .heat { display: grid; grid-template-columns: 8.5em repeat(3, 1fr); gap: .4em; }
+  .heat .hh { font: 700 1.35em "Caveat"; padding: 0 .3em; align-self: end; }
+  .heat .hh .zh { font-size: .5em; }
+  .heat .rh { font: 700 1.2em "Caveat"; line-height: 1.05; align-self: center; }
+  .heat .rh .zh { font-size: .55em; }
+  .hc { padding: .45em .7em .5em; border-radius: 4px; font-size: .93em; line-height: 1.18; position: relative; }
+  .hc.s1 { background: #e7e3d8; color: var(--ink2); }
+  .hc.s2 { background: var(--blue2); color: var(--ink); }
+  .hc.s3 { background: var(--blue); color: #fff; }
+  .hc.s3 .zh { color: #dbe4ff; }
+  .hc.s2 .zh { color: #2d3a6a; }
+  .legend { display: flex; gap: 1.2em; align-items: center; font: 500 .6em "IBM Plex Mono", monospace; color: var(--ink3); letter-spacing: .06em; text-transform: uppercase; }
+  .legend i { display: inline-block; width: 1.4em; height: .9em; border-radius: 2px; vertical-align: middle; margin-right: .4em; }
+
+  .verdict { font: 700 3.6em "Caveat"; line-height: .8; }
+  .case { display: grid; grid-template-columns: auto 1fr; gap: .2em .7em; align-items: baseline; margin-top: .6em; }
+  .court { font: 500 .6em "IBM Plex Mono", monospace; color: var(--ink3); letter-spacing: .04em; white-space: nowrap; }
+
+  .cmp { display: grid; grid-template-columns: 1.6fr 1fr 1fr; font-size: .95em; }
+  .cmp > div { padding: .38em .5em; border-bottom: 1.5px dashed #b9b6ad; }
+  .cmp .h { font: 700 1.3em "Caveat"; border-bottom: 2px solid var(--ink); line-height: 1; }
+  .cmp .h .zh { font-size: .5em; }
+  .cmp .y { color: var(--blue); font-weight: 700; }
+  .cmp .n { color: var(--red); font-weight: 700; }
+  .cmp .ti { font-size: 1.15em; }
+
+  .tree { display: grid; grid-template-columns: 1fr 1fr; gap: .6em 1.4em; }
+  .tree .q { grid-column: 1 / -1; justify-self: center; text-align: center; font: 700 1.6em "Caveat"; padding: .3em 1em; }
+  .tree .q .zh { font-size: .48em; font-weight: 400; }
+  .tree .arr { text-align: center; font: 700 1.5em "Caveat"; line-height: 1; }
+  .tree .leaf h3 { display: flex; align-items: center; gap: .3em; }
+
+  .rules { display: grid; grid-template-columns: 7.5em 1fr 1fr; gap: 0; }
+  .rules > div { padding: .5em .6em; border-bottom: 1.5px dashed #b9b6ad; display: flex; gap: .45em; align-items: flex-start; }
+  .rules > div > span { display: block; }
+  .rules .h { font: 700 1.45em "Caveat"; border-bottom: 2px solid var(--ink); align-items: center; }
+  .rules .rh { font: 700 1.25em "Caveat"; line-height: 1.05; flex-direction: column; gap: 0; }
+  .rules .rh .zh { font-size: .55em; }
+  .rules .ti { font-size: 1.2em; margin-top: .05em; }
+  .rules .ok .ti { color: var(--blue); }
+  .rules .no .ti { color: var(--red); }
+
+  .rec { display: flex; flex-direction: column; gap: .35em; height: 100%; }
+  .rec .num { font: 700 2.4em "Caveat"; color: var(--red); line-height: .8; }
+  .rec .ic { font-size: 2.1em; color: var(--blue); }
+  .rec h3 { font-size: 1.35em; }
+  .rec .ev { margin-top: auto; font-size: .82em; color: var(--ink2); border-top: 1.5px dashed #b9b6ad; padding-top: .4em; }
+  .rec .ev .lab { display: block; margin-bottom: .15em; }
+
+  .screen { background: #1e2230; color: #d8dde8; border-radius: .5em; padding: .8em 1em; font-family: "IBM Plex Mono", monospace; font-size: .8em; box-shadow: 0 .4em 1.2em rgba(0,0,0,.28); transform: rotate(-.4deg); display: flex; flex-direction: column; gap: .8em; }
+  .screen .top { display: flex; justify-content: space-between; align-items: center; color: #8d95aa; letter-spacing: .08em; text-transform: uppercase; }
+  .screen .dots i { display: inline-block; width: .7em; height: .7em; border-radius: 50%; background: #3a4155; margin-right: .3em; }
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7em; }
+  .kpi { background: #272c3d; border-radius: .4em; padding: .55em .8em; }
+  .kpi b { display: block; font: 600 2.3em "IBM Plex Mono"; color: #fff; line-height: 1.1; }
+  .kpi.z b { color: #7fe0a8; }
+  .kpi span { color: #8d95aa; text-transform: uppercase; letter-spacing: .08em; font-size: .85em; }
+  .screen table { width: 100%; border-collapse: collapse; }
+  .screen th { text-align: left; color: #8d95aa; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; font-size: .85em; padding: .35em .5em; border-bottom: 1px solid #3a4155; }
+  .screen td { padding: .5em .5em; border-bottom: 1px solid #2c3243; vertical-align: top; }
+  .screen td .zh { color: #8d95aa; font-size: .9em; }
+  .screen .pid { color: #9fb8ff; }
+  .pill { display: inline-block; padding: .15em .55em; border-radius: 99px; font-size: .9em; white-space: nowrap; }
+  .pill.w { background: #4a3a17; color: #ffd27a; }
+  .pill.a { background: #1d3557; color: #9fc4ff; }
+  .pill.u { background: #4a1f1f; color: #ff9d9d; }
+  .sev { display: inline-block; width: .65em; height: .65em; border-radius: 50%; margin-right: .4em; }
+
+  .refs { columns: 3; column-gap: 2em; font-family: "IBM Plex Sans", sans-serif; font-size: .5em; line-height: 1.36; color: var(--ink2); }
+  .refs h4 { font: 700 1.6em "Caveat"; color: var(--blue); margin: .45em 0 .1em; break-after: avoid; }
+  .refs h4:first-child { margin-top: 0; }
+  .refs p { margin-bottom: .4em; break-inside: avoid; padding-left: 1.2em; text-indent: -1.2em; }
+  .refs a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--ink3); }
+
+  /* ---------- speaker notes ---------- */
+  .notes-panel {
+    display: none; position: fixed; left: 0; right: 0; bottom: var(--bar); height: var(--notes); overflow: auto;
+    background: #24252a; border-top: 1px solid #3a3934; padding: 14px 24px 18px; color: #e8e6e1;
+    font: 18px/1.55 "IBM Plex Sans", system-ui, sans-serif;
+  }
+  body.notes-on .notes-panel { display: block; }
+  body.fs .notes-panel { bottom: 0; }
+  .np-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font: 500 12px "IBM Plex Mono", monospace; color: #a9a69f; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+  .np-head .spk { color: #fff; background: var(--blue); padding: 2px 9px; border-radius: 4px; }
+  .np-head .good { color: #7fe0a8; }
+  .np-head .late { color: #ff9d9d; }
+  .np-en p { margin: 0 0 .55em; max-width: 72em; }
+  .np-zh { display: none; color: #a7b0d0; font: 15px/1.6 "Noto Sans SC", "PingFang SC", sans-serif; margin-top: 8px; max-width: 72em; }
+  .np-zh p { margin: 0 0 .4em; }
+  body.zh-on .np-zh { display: block; }
+  .opt { color: #a9a69f; }
+  .opt::before { content: "[可删] "; color: #ffd27a; font-size: .8em; }
+  .np-next { margin-top: 12px; font: 500 12px "IBM Plex Mono", monospace; color: #6f6d66; letter-spacing: .06em; text-transform: uppercase; }
+
+  /* ---------- bottom bar ---------- */
+  .bar {
+    position: fixed; left: 0; right: 0; bottom: 0; height: var(--bar); display: flex; align-items: center; gap: 10px;
+    padding: 0 16px; font: 500 13px "IBM Plex Mono", monospace; color: #a9a69f; transition: opacity .25s;
+  }
+  body.fs .bar { opacity: 0; background: rgba(27,28,31,.92); }
+  body.fs .bar:hover, body.fs .bar:focus-within { opacity: 1; }
+  .bar button {
+    background: none; border: 1px solid #4a4943; color: #e8e6e1; border-radius: 6px; height: 34px; min-width: 36px;
+    padding: 0 10px; font: inherit; font-size: 16px; cursor: pointer;
+  }
+  .bar button:hover { border-color: #8a877e; }
+  .bar button:focus-visible, .sw input:focus-visible + .track { outline: 2px solid #6f9bff; outline-offset: 2px; }
+  #count { min-width: 64px; text-align: center; color: #e8e6e1; }
+  .sec { flex: 1; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: .06em; }
+  .sw { display: inline-flex; align-items: center; gap: 9px; cursor: pointer; color: #e8e6e1; font-family: "Noto Sans SC", "PingFang SC", sans-serif; font-size: 14px; user-select: none; }
+  .sw input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .track { width: 40px; height: 22px; border-radius: 11px; background: #3a3934; position: relative; transition: background .2s; }
+  .track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #e8e6e1; transition: transform .2s; }
+  .sw input:checked + .track { background: var(--blue); }
+  .sw input:checked + .track::after { transform: translateX(18px); }
+  .keys { color: #6f6d66; font-size: 11px; }
+  @media (max-width: 720px) { .sec, .keys { display: none; } .bar { justify-content: space-between; } }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2"/>
+    </filter>
+    <filter id="roughsvg" filterUnits="userSpaceOnUse" x="-40" y="-40" width="640" height="420">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2"/>
+    </filter>
+    <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#2b2b2e" stroke-width="1.3" opacity=".42"/>
+    </pattern>
+    <pattern id="hatchb" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#1f4fd8" stroke-width="1.6" opacity=".7"/>
+    </pattern>
+    <path id="cloud" d="M18 52 c-22 0 -26 -26 -6 -30 c0 -22 34 -28 44 -10 c22 -8 40 12 26 26 c12 14 -4 22 -16 16 z"/>
+  </defs>
+</svg>
+
+<main class="stage">
+
+<!-- ===================== 1 · TITLE ===================== -->
+<section class="slide" data-sec="Team 8">
+  <div class="pad">
+    <div class="title-grid">
+      <div>
+        <div class="kicker">Team 8 · Management Information Systems · 24 Nov 2026</div>
+        <h1>Monitor <span class="mark">data</span>,<br>not people.<span class="zh">监控数据，不监控人。</span></h1>
+        <p class="lead">Monitoring Employees on Networks, revisited for the age of generative AI.<span class="zh">重新审视《网络上的员工监控》：生成式 AI 时代的版本。</span></p>
+        <div class="agenda"><span><b>01</b>The case</span><span><b>02</b>Trends</span><span><b>03</b>Key issues</span><span><b>04</b>Recommendations</span></div>
+      </div>
+      <figure class="photo" style="--rot:2.2deg;--ar:4/5">
+        <div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Network_cables_in_server_room.jpg/1280px-Network_cables_in_server_room.jpg" alt="Network cables in a server room"></div>
+        <figcaption>where the data really goes</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 2 · CASE ===================== -->
+<!-- TODO: 对照 LMS 附件里的案例原文核对本页 -->
+<section class="slide" data-sec="01 · Summary of the case">
+  <div class="pad">
+    <div class="kicker">01 · Summary of the case</div>
+    <h2>The case: is the network used for work?<span class="zh">案例：公司网络是不是在被用来工作？</span></h2>
+    <div class="body">
+      <div class="cols grow center" style="grid-template-columns:.85fr 1fr;gap:2.5em">
+        <figure class="photo" style="--rot:-2deg;--ar:4/3">
+          <div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Office_workers_in_the_1970%27s_%289717154582%29.jpg/1280px-Office_workers_in_the_1970%27s_%289717154582%29.jpg" alt="Office workers at desks in the 1970s"></div>
+          <figcaption>the old question: who is at their desk?</figcaption>
+        </figure>
+        <ul class="ilist">
+          <li><i class="ti ti-shopping-cart"></i><div><b>Problem</b>Personal browsing on company time<span class="zh">上班时间用公司网络做私事</span></div></li>
+          <li><i class="ti ti-scale"></i><div><b>Why firms monitor</b>Productivity · bandwidth · legal liability<span class="zh">生产力、带宽、法律责任</span></div></li>
+          <li><i class="ti ti-keyboard"></i><div><b>How</b>Logs of web, email, keystrokes, screens<span class="zh">记录上网、邮件、键盘、屏幕</span></div></li>
+          <li><i class="ti ti-arrows-split-2"></i><div><b>Dilemma</b>Company assets vs. privacy and trust<span class="zh">公司资产 vs. 隐私与信任</span></div></li>
+        </ul>
+      </div>
+      <div class="sticky"><b>2026 →</b> the real question is <u>data</u>, not desks.<span class="zh">2026 年：真正的问题是数据，不是工位。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 3 · SHADOW AI DASHBOARD ===================== -->
+<section class="slide" data-sec="02 · Recent trends, 2024–2026">
+  <div class="pad">
+    <div class="kicker">02 · Recent trends</div>
+    <h2>Shadow AI dashboard, 2026<span class="zh">影子 AI 数据看板，2026</span></h2>
+    <div class="body">
+      <div class="cols c4">
+        <div class="box tile">
+          <div class="lab">Use AI at work</div>
+          <div class="row"><div class="big">45%</div><svg class="mini waffle" data-n="45" role="img" aria-label="45 of 100"></svg></div>
+          <div class="cap">of professionals, regularly<span class="zh">的职场人经常在工作中用 AI</span></div>
+        </div>
+        <div class="box tile">
+          <div class="lab">Personal accounts</div>
+          <div class="row"><div class="big">67%</div>
+            <svg class="mini" viewBox="0 0 100 100" role="img" aria-label="67 percent"><title>67% use personal accounts</title>
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#dedad0" stroke-width="15"/>
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#1f4fd8" stroke-width="15" stroke-dasharray="158 241" transform="rotate(-90 50 50)"/>
+            </svg></div>
+          <div class="cap">of AI users, outside company control<span class="zh">的 AI 用户用个人账号，不在公司管控内</span></div>
+        </div>
+        <div class="box tile">
+          <div class="lab">Non-malicious insider incidents</div>
+          <div class="row"><div class="big">×4</div>
+            <svg class="mini fig" viewBox="0 0 110 104" style="width:auto;height:4.4em" role="img" aria-label="four times higher in 2026 than 2025"><title>×4 year on year</title>
+              <path class="ln g" d="M6 86 H104"/>
+              <rect x="16" y="68" width="32" height="18" style="fill:url(#hatch)" class="ln"/>
+              <rect x="62" y="14" width="32" height="72" style="fill:#1f4fd8" class="ln b"/>
+              <text class="m" x="32" y="101" text-anchor="middle">2025</text>
+              <text class="m" x="78" y="101" text-anchor="middle">2026</text>
+            </svg></div>
+          <div class="cap">in one year<span class="zh">一年增至 4 倍</span></div>
+        </div>
+        <div class="box tile">
+          <div class="lab">DLP violations</div>
+          <div class="row"><div class="big">28%</div>
+            <svg class="mini" viewBox="0 0 100 100" role="img" aria-label="28 percent"><title>28% are source code pasted into AI</title>
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#dedad0" stroke-width="15"/>
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#c23b2c" stroke-width="15" stroke-dasharray="67 241" transform="rotate(-90 50 50)"/>
+            </svg></div>
+          <div class="cap">are source code pasted into AI<span class="zh">是把源代码贴进 AI</span></div>
+        </div>
+      </div>
+      <div class="cols grow" style="grid-template-columns:1.25fr 1fr;align-items:center">
+        <div class="box tile">
+          <div class="lab">Employee-monitoring software market · US$ billion</div>
+          <svg class="fig" viewBox="0 0 380 118" role="img" aria-label="Market grows from 2.5 billion dollars in 2026 to 5.8 billion in 2033">
+            <title>$2.5B (2026) → $5.8B (2033), +12.8% a year</title>
+            <path class="ln g" d="M30 104 H370"/>
+            <path d="M40 66 L86 61 L132 55 L178 49 L224 41 L270 33 L316 24 L362 14 L362 104 L40 104 Z" style="fill:url(#hatchb);opacity:.55"/>
+            <path class="ln b" d="M40 66 L86 61 L132 55 L178 49 L224 41 L270 33 L316 24 L362 14" style="stroke-width:2.5"/>
+            <circle cx="40" cy="66" r="4.5" class="tb"/><circle cx="362" cy="14" r="4.5" class="tb"/>
+            <text class="cv" x="46" y="56">$2.5B</text>
+            <text class="cv" x="352" y="12" text-anchor="end">$5.8B</text>
+            <text class="m" x="40" y="117" text-anchor="middle">2026</text>
+            <text class="m" x="362" y="117" text-anchor="middle">2033</text>
+            <text class="m" x="200" y="117" text-anchor="middle">+12.8% / YEAR</text>
+          </svg>
+        </div>
+        <div class="sticky"><b>So what?</b> Most leaks aren't theft. They're people using the wrong tool to work faster.
+          <span class="zh">大部分泄密不是偷窃，而是员工用错了工具，只想把活干快。</span></div>
+      </div>
+    </div>
+    <div class="src">Verizon 2026 DBIR, via The Register (19 May 2026) · Persistence Market Research (2026)</div>
+  </div>
+</section>
+
+<!-- ===================== 4 · KOREA SURVEY ===================== -->
+<section class="slide" data-sec="02 · Recent trends, 2024–2026">
+  <div class="pad">
+    <div class="kicker">02 · Recent trends · Korea</div>
+    <h2>Korean workers feel watched<span class="zh">韩国劳动者感到被监视</span></h2>
+    <div class="body" style="justify-content:center;gap:1.4em">
+      <div class="hb">
+        <div class="lb">Want clear legal limits<span class="zh">希望法律明确设限</span></div>
+        <div class="tr"><div class="fl hi" style="--v:80.4"></div></div><div class="v">80.4%</div>
+        <div class="lb">Want to be told what &amp; why, in advance<span class="zh">希望事先说明收集什么、为什么</span></div>
+        <div class="tr"><div class="fl" style="--v:73.7"></div></div><div class="v">73.7%</div>
+        <div class="lb">Expect AI to intensify monitoring<span class="zh">认为 AI 会让监控加强</span></div>
+        <div class="tr"><div class="fl" style="--v:73.5"></div></div><div class="v">73.5%</div>
+        <div class="lb">Guard what they say to colleagues<span class="zh">和同事说话变得更小心</span></div>
+        <div class="tr"><div class="fl" style="--v:48.1"></div></div><div class="v">48.1%</div>
+        <div class="lb">Feel stress or fatigue<span class="zh">感到压力或疲劳</span></div>
+        <div class="tr"><div class="fl" style="--v:42.8"></div></div><div class="v">42.8%</div>
+      </div>
+      <div class="sticky" style="align-self:flex-start"><b>Half stop speaking freely.</b> Watching people costs trust.<span class="zh">一半的人不再畅所欲言。监视人，代价是信任。</span></div>
+    </div>
+    <div class="src">직장갑질119 × Global Research · 1,000 workers per survey · Feb &amp; Jun 2026</div>
+  </div>
+</section>
+
+<!-- ===================== 5 · KOREA CHIPMAKERS ===================== -->
+<section class="slide" data-sec="02 · Recent trends, 2024–2026">
+  <div class="pad">
+    <div class="kicker">02 · Recent trends · Korea</div>
+    <h2>Korea's chipmakers: ban → build → open<span class="zh">韩国芯片企业：禁止 → 自建 → 开放</span></h2>
+    <div class="body" style="justify-content:space-around">
+      <div class="lane">
+        <figure class="photo" style="--rot:-1.8deg;--ar:16/10">
+          <div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/DSC2677_%2852450942748%29.jpg/1280px-DSC2677_%2852450942748%29.jpg" alt="Meeting room at Samsung Digital City, Suwon"></div>
+          <figcaption>Samsung · Suwon</figcaption>
+        </figure>
+        <div class="track3">
+          <div class="stop"><div class="yr">2023</div><div class="dot r"></div><div class="t">Code pasted into ChatGPT → <b class="red">ban</b><span class="zh">源代码贴进 ChatGPT → 禁用</span></div></div>
+          <div class="stop"><div class="yr">2024–25</div><div class="dot"></div><div class="t">In-house AI: Samsung Gauss<span class="zh">改用自研 Samsung Gauss</span></div></div>
+          <div class="stop"><div class="yr">Jun 2026</div><div class="dot b"></div><div class="t"><b class="blue">Opens</b> ChatGPT, Gemini, Claude<span class="zh">正式开放 ChatGPT、Gemini、Claude</span></div></div>
+        </div>
+      </div>
+      <div class="lane">
+        <figure class="photo" style="--rot:1.5deg;--ar:16/10">
+          <div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/SK_Hynix_DDR5_Tall_MRDIMM.jpg/1280px-SK_Hynix_DDR5_Tall_MRDIMM.jpg" alt="SK hynix DDR5 memory module" style="--pos:center 40%"></div>
+          <figcaption>SK hynix · DDR5</figcaption>
+        </figure>
+        <div class="track3">
+          <div class="stop"><div class="yr">2023</div><div class="dot r"></div><div class="t">External AI <b class="red">banned</b><span class="zh">禁用外部 AI</span></div></div>
+          <div class="stop"><div class="yr">2024–25</div><div class="dot"></div><div class="t">In-house, on open-source models<span class="zh">用开源模型自建</span></div></div>
+          <div class="stop"><div class="yr">Jun 2026</div><div class="dot b"></div><div class="t">Copilot &amp; ChatGPT Enterprise, <b class="blue">non-core work first</b><span class="zh">评估 Copilot 和 ChatGPT Enterprise，先开放非核心技术领域</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="src">KED Global (May 2023) · Korea Herald (Jun 2026) · Asia Economy (Jun 2026) · edaily (Jun 2026)</div>
+  </div>
+</section>
+
+<!-- ===================== 6 · CHINA & US ===================== -->
+<section class="slide" data-sec="02 · Recent trends, 2024–2026">
+  <div class="pad">
+    <div class="kicker">02 · Recent trends · China &amp; US</div>
+    <h2>Three ways to stop a leak<span class="zh">防泄密的三种方式</span></h2>
+    <div class="body">
+      <div class="cols c3 grow" style="gap:2em">
+        <div class="card">
+          <figure class="photo" style="--rot:-1.6deg;--ar:16/10">
+            <div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Tencent_Binhai_Mansion.jpg/1280px-Tencent_Binhai_Mansion.jpg" alt="Tencent Binhai Mansion, Shenzhen" style="--pos:center 30%"></div>
+            <figcaption>Tencent · Shenzhen</figcaption>
+          </figure>
+          <div><span class="tag r">Punish</span><span class="zhi">查处</span></div>
+          <div class="hb sm">
+            <div class="lb">Cases<span class="zh">查处</span></div><div class="tr"><div class="fl" style="--v:78"></div></div><div class="v">70+</div>
+            <div class="lb">Dismissed<span class="zh">解聘</span></div><div class="tr"><div class="fl hi" style="--v:100"></div></div><div class="v">90+</div>
+            <div class="lb">To police<span class="zh">移送公安</span></div><div class="tr"><div class="fl" style="--v:22"></div></div><div class="v">20+</div>
+          </div>
+          <div class="lab">2025 · "high-voltage line" cases, incl. leaks</div>
+        </div>
+        <div class="card">
+          <figure class="iconart"><div class="in"><i class="ti ti-key"></i><i class="ti ti-key"></i><i class="ti ti-lock"></i></div><figcaption>Anthropic · ASL-3</figcaption></figure>
+          <div><span class="tag">Protect the asset</span><span class="zhi">保护资产</span></div>
+          <div class="say">2 people to touch the model weights<span class="zh">访问模型权重须双人授权</span></div>
+          <div><span class="chip"><i class="ti ti-list-check"></i>allow-listed software</span><span class="chip"><i class="ti ti-arrow-bar-right"></i>egress limits</span></div>
+        </div>
+        <div class="card">
+          <figure class="photo" style="--rot:1.6deg;--ar:16/10">
+            <div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Platform_37_entrance_2026-07-07.jpg/1280px-Platform_37_entrance_2026-07-07.jpg" alt="Google building at King's Cross, London"></div>
+            <figcaption>Google DeepMind · London</figcaption>
+          </figure>
+          <div><span class="tag k">Contract</span><span class="zhi">用合同</span></div>
+          <div class="say">12 months<span class="zh">最长一年</span></div>
+          <div>paid non-compete for departing researchers<span class="zh">离职研究员的带薪竞业限制</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="src">Yicai (Jan 2026) · IT之家 (Jul 2026) · Anthropic (May 2025) · TechRepublic (Apr 2025)</div>
+  </div>
+</section>
+
+<!-- ===================== 7 · PLATFORMS ===================== -->
+<section class="slide" data-sec="02 · Recent trends, 2024–2026">
+  <div class="pad">
+    <div class="kicker">02 · Recent trends · Collaboration platforms</div>
+    <h2>The platform gives power. The law gives protection.<span class="zh">平台给管理员权力，法律给员工保护。</span></h2>
+    <div class="body">
+      <div class="cols c2 grow center" style="gap:2em">
+        <div class="box">
+          <h3>Google Workspace admin can…<span class="zh">Google Workspace 管理员可以……</span></h3>
+          <div class="chips-big" style="margin-top:.5em">
+            <span class="chip"><i class="ti ti-download"></i>block data export<span class="zh">关闭数据导出</span></span>
+            <span class="chip"><i class="ti ti-lock"></i>lock a suspended user out<span class="zh">暂停账号后禁止下载</span></span>
+            <span class="chip"><i class="ti ti-database"></i>delete a leaver's data<span class="zh">删除离职者数据</span></span>
+            <span class="chip"><i class="ti ti-user-search"></i>search everyone's mail &amp; Drive<span class="zh">搜索全员邮件和云盘</span></span>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Feishu / Lark admin can…<span class="zh">飞书管理员可以……</span></h3>
+          <div class="chips-big" style="margin-top:.5em">
+            <span class="chip"><i class="ti ti-file-text"></i>read admin logs<span class="zh">查看管理员日志</span></span>
+            <span class="chip"><i class="ti ti-eye"></i>audit member behaviour<span class="zh">审计成员行为</span></span>
+            <span class="chip"><i class="ti ti-shield-lock"></i>run DLP rules<span class="zh">设置防泄漏规则</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="sticky" style="align-self:center"><b>Same power, different law.</b> What protects the employee is the country, not the app. →
+        <span class="zh">权力差不多，法律不一样。保护员工的是国家的法律，不是软件。</span></div>
+    </div>
+    <div class="src">Google Workspace Admin Help (Takeout · Delete a user · Vault) · Feishu security article</div>
+  </div>
+</section>
+
+<!-- ===================== 8 · LAW HEATMAP ===================== -->
+<section class="slide" data-sec="02 · Recent trends, 2024–2026">
+  <div class="pad">
+    <div class="kicker">02 · Recent trends · Law</div>
+    <h2>How much does the law protect the employee?<span class="zh">法律对员工的保护有多强？</span></h2>
+    <div class="body">
+      <div class="heat grow">
+        <div></div><div class="hh">China<span class="zh">中国</span></div><div class="hh">Korea<span class="zh">韩国</span></div><div class="hh">California<span class="zh">美国加州</span></div>
+
+        <div class="rh">Consent<span class="zh">需要同意吗</span></div>
+        <div class="hc s1">Not needed: work rules are enough<span class="zh">不需要，劳动规章即可</span></div>
+        <div class="hc s3">Consent, or clear legitimate interest<span class="zh">需同意，或公司正当利益明显优先</span></div>
+        <div class="hc s1">No specific statute<span class="zh">没有专门立法</span></div>
+
+        <div class="rh">Procedure<span class="zh">程序</span></div>
+        <div class="hc s2">Notice + minimum necessary<span class="zh">事先告知 + 最小必要</span></div>
+        <div class="hc s3">Labour-council consultation (30+ staff)<span class="zh">30 人以上须经劳资协议会协商</span></div>
+        <div class="hc s2">Notice + risk assessment (2027)<span class="zh">通知 + 风险评估（2027）</span></div>
+
+        <div class="rh">Reading content<span class="zh">看内容</span></div>
+        <div class="hc s2">Deleted WeChat logs rejected as evidence<span class="zh">恢复的微信记录不被采信</span></div>
+        <div class="hc s3">A crime, and inadmissible<span class="zh">构成犯罪，且不能作证据</span></div>
+        <div class="hc s2">1967 wiretap law (CIPA)<span class="zh">1967 年窃听法（CIPA）</span></div>
+
+        <div class="rh">AI rules<span class="zh">AI 新规</span></div>
+        <div class="hc s1">None<span class="zh">无</span></div>
+        <div class="hc s1">Proposed, Oct 2025<span class="zh">2025 年 10 月提议</span></div>
+        <div class="hc s3">No emotion AI · no firing by algorithm (2027)<span class="zh">禁止情绪识别 · 不能只凭算法处分（2027）</span></div>
+      </div>
+      <div class="legend"><span><i style="background:#e7e3d8"></i>weak</span><span><i style="background:#9db3ef"></i>medium</span><span><i style="background:#1f4fd8"></i>strong protection</span></div>
+    </div>
+    <div class="src">PIPL Art. 6, 7, 13 · Korea PIPA Art. 15, Workers' Participation Act Art. 20, Communications Secrets Act Art. 3–4 · CPPA ADMT rules · AB 1883 · SB 947</div>
+  </div>
+</section>
+
+<!-- ===================== 9 · KOREAN COURTS ===================== -->
+<section class="slide" data-sec="02 · Recent trends, 2024–2026">
+  <div class="pad">
+    <div class="kicker">02 · Recent trends · Korean courts</div>
+    <h2>In Korea: metadata is fine, content is a crime<span class="zh">在韩国：看元数据没问题，看内容是犯罪</span></h2>
+    <div class="body">
+      <div class="cols c2 grow" style="gap:2em">
+        <div class="box b fill big-panel" style="display:flex;flex-direction:column;justify-content:center">
+          <div style="display:flex;align-items:center;gap:.4em"><span class="verdict blue">✓</span><h3 class="blue" style="font-size:2em">Metadata<span class="zh">元数据</span></h3></div>
+          <div class="case"><span class="court">SEOUL HIGH COURT · 2021</span><span>URLs + access times → <b class="blue">lawful</b><span class="zh">网址 + 访问时间 → 合法</span></span></div>
+        </div>
+        <div class="box r fill big-panel" style="display:flex;flex-direction:column;justify-content:center">
+          <div style="display:flex;align-items:center;gap:.4em"><span class="verdict red">✗</span><h3 class="red" style="font-size:2em">Content<span class="zh">内容</span></h3></div>
+          <div class="case"><span class="court">SEOUL EASTERN · 2017</span><span>KakaoTalk screen capture → <b class="red">prison, suspended</b><span class="zh">截屏记录 KakaoTalk → 有期徒刑，缓刑</span></span></div>
+          <div class="case"><span class="court">DAEGU DISTRICT · 2024</span><span>Browsing forensics → <b class="red">damages</b><span class="zh">取证收集浏览记录 → 判赔</span></span></div>
+        </div>
+      </div>
+      <div class="sticky"><b>AI prompts count as content.</b> Logging them needs explicit consent in the work rules.<span class="zh">AI 提示词属于通信内容，记录它必须在就业规则里明确取得同意。</span></div>
+    </div>
+    <div class="src">2020누67515 · 2016고합274 · 2023나320254 · Song Woo-yong (Shin &amp; Kim), Hankyung, 19 May 2026</div>
+  </div>
+</section>
+
+<!-- ===================== 10 · ISSUE 1 ===================== -->
+<section class="slide" data-sec="03 · Key issues in IS &amp; digital transformation">
+  <div class="pad">
+    <div class="kicker">03 · Key issues in IS &amp; digital transformation</div>
+    <h2>Issue 1 · Leaks got small<span class="zh">问题一：泄密变"小"了</span></h2>
+    <div class="body">
+      <div class="cols grow center" style="grid-template-columns:1.1fr 1fr;gap:2.5em">
+        <svg class="fig" viewBox="0 0 420 300" role="img" aria-label="A bulk copy of gigabytes rises above the alert threshold; an AI paste of kilobytes stays far below it">
+          <path class="ln" d="M40 18 V250 H405"/>
+          <text class="m" transform="translate(26 200) rotate(-90)">DATA VOLUME</text>
+          <path class="ln r d" d="M40 112 H405"/>
+          <text class="cv tr" x="402" y="102" text-anchor="end">alert threshold</text>
+          <rect class="ln" x="85" y="38" width="92" height="212" style="fill:url(#hatch)"/>
+          <text x="131" y="272" text-anchor="middle">bulk copy</text>
+          <text class="m" x="131" y="290" text-anchor="middle">GIGABYTES</text>
+          <text class="cv" x="190" y="60">caught</text>
+          <rect class="ln b" x="262" y="238" width="92" height="12" style="fill:url(#hatchb)"/>
+          <text x="308" y="272" text-anchor="middle">AI paste</text>
+          <text class="m" x="308" y="290" text-anchor="middle">KILOBYTES</text>
+          <text class="cv tb" x="300" y="178" text-anchor="middle">slips under,</text>
+          <text class="cv tb" x="300" y="200" text-anchor="middle">high value!</text>
+          <path class="ln b" d="M300 208 C302 218 306 224 308 232 M302 225 l6 8 l5 -9"/>
+        </svg>
+        <div style="display:flex;flex-direction:column;gap:1.2em">
+          <div class="say">Then: gigabytes, caught.<br><span class="blue">Now: kilobytes, missed.</span><span class="zh">过去：几个 GB，抓得到。现在：几 KB，抓不到。</span></div>
+          <div class="sticky">To see a 200-line paste, you'd have to read content: the biggest privacy cost.<span class="zh">想看到 200 行代码的粘贴，就得看内容，而这是最大的隐私代价。</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 11 · ISSUE 2 ===================== -->
+<section class="slide" data-sec="03 · Key issues in IS &amp; digital transformation">
+  <div class="pad">
+    <div class="kicker">03 · Key issues in IS &amp; digital transformation</div>
+    <h2>Issue 2 · Tap the line, or decrypt it?<span class="zh">问题二：旁路监听，还是串联解密？</span></h2>
+    <div class="body">
+      <div class="cols grow center" style="grid-template-columns:1.05fr 1fr;gap:2em">
+        <svg class="fig" viewBox="0 0 470 290" role="img" aria-label="Top: traffic passes a switch to the internet while a passive tap copies metadata. Bottom: a proxy sits in the path and decrypts all traffic.">
+          <text class="m" x="6" y="20">OUT-OF-BAND TAP</text>
+          <rect class="ln fp" x="6" y="36" width="88" height="44" rx="3"/><text x="50" y="63" text-anchor="middle">Employees</text>
+          <path class="ln" d="M98 58 H140 M132 52 l8 6 l-8 6"/>
+          <rect class="ln fp" x="144" y="36" width="86" height="44" rx="3"/><text x="187" y="63" text-anchor="middle">Switch</text>
+          <path class="ln" d="M234 58 H318 M310 52 l8 6 l-8 6"/>
+          <text class="m" x="276" y="36" text-anchor="middle">TLS</text>
+          <text class="m" x="276" y="49" text-anchor="middle">untouched</text>
+          <use href="#cloud" class="ln fp" transform="translate(320 18)"/><text x="374" y="64" text-anchor="middle">Internet</text>
+          <path class="ln b d" d="M187 82 V96"/>
+          <circle class="ln b fp" cx="187" cy="102" r="6"/>
+          <path class="ln b d" d="M187 109 V118"/>
+          <rect class="ln b fp" x="92" y="120" width="190" height="30" rx="3"/>
+          <text class="m" x="187" y="139" text-anchor="middle" style="fill:#1f4fd8">domain · bytes · time</text>
+          <text class="cv tb" x="296" y="140">copy only</text>
+
+          <text class="m" x="6" y="186">INLINE DECRYPTION</text>
+          <rect class="ln fp" x="6" y="202" width="88" height="44" rx="3"/><text x="50" y="229" text-anchor="middle">Employees</text>
+          <path class="ln" d="M98 224 H140 M132 218 l8 6 l-8 6"/>
+          <rect class="ln r fp" x="144" y="194" width="134" height="60" rx="3"/>
+          <text class="cv tr" x="211" y="218" text-anchor="middle">Proxy</text>
+          <text class="m" x="211" y="238" text-anchor="middle">decrypt → read →</text>
+          <text class="m" x="211" y="250" text-anchor="middle">re-encrypt</text>
+          <path class="ln" d="M282 224 H318 M310 218 l8 6 l-8 6"/>
+          <use href="#cloud" class="ln fp" transform="translate(320 184)"/><text x="374" y="230" text-anchor="middle">Internet</text>
+          <text class="cv tr" x="211" y="280" text-anchor="middle">sees everything</text>
+        </svg>
+        <div style="display:flex;flex-direction:column;gap:1.1em">
+          <div class="cmp">
+            <div class="h"></div><div class="h blue">Tap<span class="zh">旁路</span></div><div class="h red">Decrypt<span class="zh">串联解密</span></div>
+            <div>Reads content<span class="zh">看内容</span></div><div class="y"><i class="ti ti-x"></i></div><div class="n"><i class="ti ti-check"></i></div>
+            <div>Can block<span class="zh">能拦截</span></div><div class="n"><i class="ti ti-x"></i></div><div class="y"><i class="ti ti-check"></i></div>
+            <div>Privacy cost<span class="zh">隐私代价</span></div><div class="y">Low<span class="zh">低</span></div><div class="n">High<span class="zh">高</span></div>
+            <div>Running cost<span class="zh">运行成本</span></div><div class="y">Low<span class="zh">低</span></div><div class="n">High<span class="zh">高</span></div>
+            <div>Legal risk in Korea<span class="zh">韩国法律风险</span></div><div class="y">None<span class="zh">无</span></div><div class="n">Criminal<span class="zh">刑事</span></div>
+          </div>
+          <div class="sticky"><b>We tap.</b> No decryption. Block QUIC; send enterprise AI through a gateway.<span class="zh">我们用旁路，不解密。封掉 QUIC，企业版 AI 走公司网关。</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 12 · ISSUES 3–6 ===================== -->
+<section class="slide" data-sec="03 · Key issues in IS &amp; digital transformation">
+  <div class="pad">
+    <div class="kicker">03 · Key issues in IS &amp; digital transformation</div>
+    <h2>Issues 3–6 · What the design must solve<span class="zh">问题三到六：设计必须解决的事</span></h2>
+    <div class="body">
+      <div class="cols c4 grow tiles-big">
+        <div class="box rec">
+          <i class="ti ti-mask ic"></i>
+          <h3>Pseudonymise, don't anonymise<span class="zh">假名化，不是匿名化</span></h3>
+          <div>Hidden by default, traceable after an alert.<span class="zh">平时看不到是谁，报警后能追到人。</span></div>
+        </div>
+        <div class="box rec">
+          <i class="ti ti-route ic"></i>
+          <h3>Sort by destination<span class="zh">按目的地分类</span></h3>
+          <div><b>Off-limits:</b> banks, health, private chat. <b>Watched:</b> AI, cloud drives, code hosts.<span class="zh">不碰：银行、医疗、私聊。重点看：AI、网盘、代码托管。</span></div>
+        </div>
+        <div class="box rec">
+          <i class="ti ti-camera ic"></i>
+          <h3>Blind spots<span class="zh">盲区</span></h3>
+          <div>Phones, home Wi-Fi, photos of a screen.<span class="zh">手机、家里的网络、拍屏幕。</span></div>
+        </div>
+        <div class="box rec">
+          <i class="ti ti-chart-dots ic"></i>
+          <h3>Baselines are AI decisions<span class="zh">个人基线就是自动化决策</span></h3>
+          <div>Per-person baselines need a risk assessment (California ADMT).<span class="zh">每人一条基线，须做风险评估（加州 ADMT）。</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 13 · STANCE ===================== -->
+<section class="slide" data-sec="04 · Managerial implications &amp; recommendations">
+  <div class="pad">
+    <div class="kicker">04 · Managerial implications</div>
+    <h2>Output is the company's business. Minutes are not.<span class="zh">产出归公司管，每一分钟不归。</span></h2>
+    <div class="body">
+      <div class="cols grow center" style="grid-template-columns:1.25fr .75fr;gap:2.5em">
+        <div class="tree">
+          <div class="q box">Does it harm others?<span class="zh">会不会伤害到别人？</span></div>
+          <div class="arr">↙ no<span class="zh">不会</span></div><div class="arr red">yes ↘<span class="zh">会</span></div>
+          <div class="box b leaf">
+            <h3 class="blue"><i class="ti ti-user-check"></i>Private<span class="zh"> · 私事</span></h3>
+            <span class="chip">shopping</span><span class="chip">video</span><span class="chip">KPI met, done early</span>
+          </div>
+          <div class="box r leaf">
+            <h3 class="red"><i class="ti ti-alert-triangle"></i>Monitor<span class="zh"> · 监控</span></h3>
+            <span class="chip">data leaving</span><span class="chip">bypassing security</span>
+          </div>
+        </div>
+        <figure class="photo" style="--rot:2deg;--ar:4/3">
+          <div class="ph"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Mountain_View_%28CA%2C_USA%29%2C_Charleston_Road%2C_Google-Fahrr%C3%A4der_--_2022_--_2903.jpg/1280px-Mountain_View_%28CA%2C_USA%29%2C_Charleston_Road%2C_Google-Fahrr%C3%A4der_--_2022_--_2903.jpg" alt="Google bicycles in Mountain View"></div>
+          <figcaption>Google, 2004: 20% of time, staff's choice</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="src">Page &amp; Brin, Founders' IPO letter (2004): "spend 20% of their time working on what they think will most benefit Google"</div>
+  </div>
+</section>
+
+<!-- ===================== 14 · RULEBOOK ===================== -->
+<section class="slide" data-sec="04 · Managerial implications &amp; recommendations">
+  <div class="pad">
+    <div class="kicker">04 · Managerial implications</div>
+    <h2>The rulebook<span class="zh">规则</span></h2>
+    <div class="body" style="justify-content:center">
+      <div class="rules">
+        <div class="h"></div><div class="h blue">May</div><div class="h red">May not</div>
+        <div class="rh">Devices<span class="zh">设备</span></div>
+        <div class="ok"><i class="ti ti-check"></i><span>Company devices<span class="zh">公司配发的设备</span></span></div>
+        <div class="no"><i class="ti ti-x"></i><span>Personal devices<span class="zh">私人设备</span></span></div>
+        <div class="rh">Data<span class="zh">数据</span></div>
+        <div class="ok"><i class="ti ti-check"></i><span>Metadata · prompts on the company AI gateway<span class="zh">元数据 · 公司 AI 网关上的提示词</span></span></div>
+        <div class="no"><i class="ti ti-x"></i><span>Private chats · personal accounts · screens<span class="zh">私人聊天 · 个人账号 · 屏幕</span></span></div>
+        <div class="rh">Identity<span class="zh">识别到人</span></div>
+        <div class="ok"><i class="ti ti-check"></i><span>After an alert, by procedure<span class="zh">报警后按程序</span></span></div>
+        <div class="no"><i class="ti ti-x"></i><span>By default · productivity scores<span class="zh">默认识别 · 生产力打分</span></span></div>
+        <div class="rh">Decisions<span class="zh">决定</span></div>
+        <div class="ok"><i class="ti ti-check"></i><span>Alerts → human review<span class="zh">报警 → 人工复核</span></span></div>
+        <div class="no"><i class="ti ti-x"></i><span>Discipline by algorithm alone<span class="zh">只凭算法处分</span></span></div>
+      </div>
+      <div class="sticky" style="align-self:flex-start;margin-top:.4em"><b>Enterprise account = work data.</b> Prompts there are not private messages.<span class="zh">企业账号里的提示词是工作数据，不是私人通讯。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 15 · RECOMMENDATIONS ===================== -->
+<section class="slide" data-sec="04 · Managerial implications &amp; recommendations">
+  <div class="pad">
+    <div class="kicker">04 · Strategic recommendations for IS</div>
+    <h2>Five recommendations<span class="zh">五条建议</span></h2>
+    <div class="body">
+      <div class="cols c5 grow">
+        <div class="box rec"><div class="num">1</div><i class="ti ti-stack-2 ic"></i>
+          <h3>Tier data &amp; access<span class="zh">数据和权限分层</span></h3>
+          <div>Sensitive data only in controlled apps<span class="zh">敏感数据只在受控应用里</span></div>
+          <div class="ev"><span class="lab">Evidence</span>SK hynix: non-core first<span class="zh">SK 海力士：先开放非核心</span></div></div>
+        <div class="box rec"><div class="num">2</div><i class="ti ti-eye-off ic"></i>
+          <h3>Tap, don't decrypt<span class="zh">旁路，不解密</span></h3>
+          <div>Destinations and volumes only<span class="zh">只看目的地和流量</span></div>
+          <div class="ev"><span class="lab">Evidence</span>Korean courts<span class="zh">韩国判例</span></div></div>
+        <div class="box rec"><div class="num">3</div><i class="ti ti-route ic"></i>
+          <h3>AI through a gateway<span class="zh">AI 走公司网关</span></h3>
+          <div>Direct to consumer AI = alert<span class="zh">直连个人版 AI 即报警</span></div>
+          <div class="ev"><span class="lab">Evidence</span>Samsung: ban 2023, open 2026<span class="zh">三星：2023 禁，2026 开</span></div></div>
+        <div class="box rec"><div class="num">4</div><i class="ti ti-mask ic"></i>
+          <h3>Pseudonyms + 2 signatures<span class="zh">假名 + 双人签字</span></h3>
+          <div>Unmask only after a high-risk alert<span class="zh">高危报警后才解除假名</span></div>
+          <div class="ev"><span class="lab">Evidence</span>Anthropic 2-person rule<span class="zh">Anthropic 双人授权</span></div></div>
+        <div class="box rec"><div class="num">5</div><i class="ti ti-user-check ic"></i>
+          <h3>Humans decide<span class="zh">由人做决定</span></h3>
+          <div>The model only sorts the queue<span class="zh">模型只负责排队</span></div>
+          <div class="ev"><span class="lab">Evidence</span>California SB 947<span class="zh">加州 SB 947</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 16 · SOC DASHBOARD ===================== -->
+<section class="slide" data-sec="04 · Managerial implications &amp; recommendations">
+  <div class="pad">
+    <div class="kicker">04 · Strategic recommendations for IS</div>
+    <h2>What the security team sees<span class="zh">安全团队看到的画面</span></h2>
+    <div class="body">
+      <div class="cols grow" style="grid-template-columns:1fr 13em;gap:1.6em">
+        <div class="screen">
+          <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>Data-flow monitor · today</span><span>names hidden</span></div>
+          <div class="kpis">
+            <div class="kpi"><b>4</b><span>alerts</span></div>
+            <div class="kpi"><b>1</b><span>unmasked</span></div>
+            <div class="kpi z"><b>0</b><span>names shown by default</span></div>
+          </div>
+          <table>
+            <thead><tr><th>Time</th><th>User</th><th>Trigger<span class="zh">触发条件</span></th><th>Size</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>09:12</td><td class="pid">user_7f3a</td><td><span class="sev" style="background:#ff8a80"></span>Upload to personal drive<span class="zh">上传到私人网盘</span></td><td>3.2 GB</td><td><span class="pill w">2 signatures pending</span></td></tr>
+              <tr><td>10:47</td><td class="pid">user_c21e</td><td><span class="sev" style="background:#ffd27a"></span>Consumer AI, bypassing gateway<span class="zh">绕过网关直连个人版 AI</span></td><td>14 KB</td><td><span class="pill a">in review</span></td></tr>
+              <tr><td>13:05</td><td class="pid">user_9b40</td><td><span class="sev" style="background:#ff8a80"></span>Bulk download after notice<span class="zh">提离职后大量下载</span></td><td>18 GB</td><td><span class="pill w">2 signatures pending</span></td></tr>
+              <tr><td>15:30</td><td class="pid">user_e88d</td><td><span class="sev" style="background:#ff8a80"></span>Security agent disabled<span class="zh">关闭安全控件</span></td><td>—</td><td><span class="pill u">unmasked · HR + CISO</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.9em">
+          <div class="box b">
+            <h3 class="blue">Never an alert<span class="zh">永远不报警</span></h3>
+            <span class="chip"><i class="ti ti-shopping-cart"></i>shopping</span>
+            <span class="chip"><i class="ti ti-movie"></i>video</span>
+            <span class="chip"><i class="ti ti-message-circle"></i>private chat</span>
+            <span class="chip"><i class="ti ti-building-bank"></i>banking</span>
+            <span class="chip"><i class="ti ti-heartbeat"></i>health</span>
+            <span class="chip"><i class="ti ti-briefcase"></i>job sites</span>
+          </div>
+          <div class="sticky">Every alert comes from metadata alone.<span class="zh">每一条报警都只靠元数据。</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 17 · CLOSING ===================== -->
+<section class="slide" data-sec="Team 8">
+  <div class="pad">
+    <div class="title-grid" style="grid-template-columns:1fr 1fr">
+      <div>
+        <div class="kicker">Takeaway</div>
+        <h1>Monitor <span class="mark">data</span>,<br>not people.<span class="zh">监控数据，不监控人。</span></h1>
+        <p class="say blue" style="margin-top:.6em;font-size:2.4em">Questions?<span class="zh">欢迎提问</span></p>
+      </div>
+      <div class="box">
+        <ul class="ilist" style="font-size:1.15em">
+          <li><i class="ti ti-route"></i><div>Watch where data goes, not what people do.<span class="zh">看数据去了哪里，不看人在做什么。</span></div></li>
+          <li><i class="ti ti-mask"></i><div>Nobody is named until an alert.<span class="zh">报警之前，不识别任何人。</span></div></li>
+          <li><i class="ti ti-target-arrow"></i><div>Judge output, not minutes.<span class="zh">看产出，不看分钟。</span></div></li>
+          <li><i class="ti ti-user-check"></i><div>People decide; the model sorts.<span class="zh">人做决定，模型只排队。</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 18 · REFERENCES ===================== -->
+<section class="slide" data-sec="05 · References">
+  <div class="pad">
+    <div class="kicker">05 · References</div>
+    <h2>References<span class="zh">参考文献</span></h2>
+    <div class="body">
+      <div class="refs">
+        <h4>Data</h4>
+        <p>Jones, C. (2026, May 19). Shadow AI invades the workplace, up 4x in the last year. <i>The Register</i>. <a href="https://www.theregister.com/ai-ml/2026/05/19/shadow-ai-surges-in-the-workplace/5242868">theregister.com</a></p>
+        <p>경향신문 (2026, Aug 30). 직장인 43% "CCTV·스마트폰앱 등 전자 노동 감시에 압박감 느껴". <a href="https://www.khan.co.kr/article/202608301603001/">khan.co.kr</a></p>
+        <p>네이트 뉴스 (2026, Jun 7). 직장인 10명 중 8명 "'전자노동감시' 법적 규제 마련해야". <a href="https://m.news.nate.com/view/20260607n13613">news.nate.com</a></p>
+        <p>Persistence Market Research (2026). Employee surveillance and monitoring software market. <a href="https://www.persistencemarketresearch.com/market-research/employee-surveillance-and-monitoring-software-market.asp">persistencemarketresearch.com</a></p>
+        <p>Page, L., &amp; Brin, S. (2004). Founders' IPO letter. Alphabet Investor Relations. <a href="https://abc.xyz/investor/founders-letters/ipo-letter/">abc.xyz</a></p>
+        <h4>Companies</h4>
+        <p>第一财经 (2026, Jan 23). 腾讯 2025 年反舞弊通报. <a href="https://www.yicai.com/news/103021056.html">yicai.com</a></p>
+        <p>IT之家 (2026, Jul 24). 腾讯员工因泄密被辞退. <a href="https://www.ithome.com/0/980/936.htm">ithome.com</a></p>
+        <p>KED Global (2023, May 2). Samsung bans ChatGPT. <a href="https://www.kedglobal.com/artificial-intelligence/newsView/ked202305020022">kedglobal.com</a></p>
+        <p>Korea Herald (2026, Jun 12). SK hynix town hall. <a href="https://www.koreaherald.com/article/10770334">koreaherald.com</a></p>
+        <p>아시아경제 (2026, Jun 12). 반도체 업계 AI 전환. <a href="https://view.asiae.co.kr/article/2026061207362777087">asiae.co.kr</a></p>
+        <p>edaily (2026, Jun 16). Samsung adopts external AI. <a href="https://en.edaily.co.kr/news/eda202606155694/">edaily.co.kr</a></p>
+        <p>Anthropic (2025, May 22). Activating ASL-3 protections. <a href="https://www.anthropic.com/news/activating-asl3-protections">anthropic.com</a></p>
+        <p>TechRepublic (2025, Apr 14). DeepMind non-compete clauses. <a href="https://www.techrepublic.com/article/news-deepmind-noncompete-clauses-ai-talent-wars/">techrepublic.com</a></p>
+        <h4>Platforms &amp; law</h4>
+        <p>Google Workspace Admin Help: Takeout; Delete a user; Vault FAQ. <a href="https://knowledge.workspace.google.com/admin/users/advanced/allow-or-block-google-takeout">knowledge.workspace.google.com</a></p>
+        <p>飞书. 企业信息安全五大防护. <a href="https://www.feishu.cn/content/article/7592159853888539847">feishu.cn</a></p>
+        <p>中伦律师事务所 (2021, Oct 28). 个保法下的员工个人信息处理. <a href="https://www.zhonglun.com/research/articles/8701.html">zhonglun.com</a></p>
+        <p>中新网 (2023, Apr 6). 查员工手机与微信记录案. <a href="https://www.chinanews.com.cn/sh/2023/04-06/9984938.shtml">chinanews.com.cn</a></p>
+        <p>송우용 (2026, May 19). 직원들의 AI 활용 모니터링, 어디까지 가능할까? 한국경제. <a href="https://www.hankyung.com/article/202605195926i">hankyung.com</a></p>
+        <p>파이낸셜뉴스 (2025, Oct 13). 전자 노동감시 토론회. <a href="https://www.fnnews.com/news/202510131424321853">fnnews.com</a></p>
+        <p>Mintz (2026, Sep 10). California's AI workplace legislative blitz. <a href="https://www.mintz.com/insights-center/viewpoints/2226/2026-09-10-californias-ai-workplace-legislative-blitz-california">mintz.com</a></p>
+        <p>Fisher Phillips (2026, Oct 1). California's new workplace laws. <a href="https://www.fisherphillips.com/en/insights/insights/californias-new-workplace-laws-put-ai-and-employee-monitoring-in-the-spotlight">fisherphillips.com</a></p>
+        <p>Fisher Phillips (2025, Jul 31). New California regs on ADMT. <a href="https://www.fisherphillips.com/en/news-insights/new-california-regs-will-impact-your-ai-and-privacy-policies.html">fisherphillips.com</a></p>
+        <p>Laudon, K. C., &amp; Laudon, J. P. Monitoring employees on networks: Unethical or good business? <i>Management Information Systems</i>.</p>
+        <h4>Photos (Wikimedia Commons)</h4>
+        <p>Network cables in server room, ProjectManhattan, CC BY-SA 3.0 · Office workers in the 1970s, Tyne &amp; Wear Archives &amp; Museums, no known restrictions · Samsung Digital City, Austrian Federal Ministry for European and International Affairs, CC BY 2.0 · SK Hynix DDR5 Tall MRDIMM, 4300streetcar, CC BY 4.0 · Tencent Binhai Mansion, Wishva de Silva, CC BY-SA 4.0 · Platform 37 entrance, The wub, CC BY-SA 4.0 · Google bicycles, Mountain View, Dietmar Rabich, CC BY-SA 4.0</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<aside class="notes-panel" id="notes" aria-label="Speaker notes"></aside>
+
+<nav class="bar" aria-label="Slide controls">
+  <button id="prev" aria-label="Previous slide">‹</button>
+  <span id="count">01 / 18</span>
+  <button id="next" aria-label="Next slide">›</button>
+  <span class="sec" id="sec"></span>
+  <span class="keys">← → 翻页 · T 中文 · N 讲稿 · P 演讲者视图 · F 全屏</span>
+  <label class="sw"><input type="checkbox" id="zh"><span class="track"></span><span>中文翻译</span></label>
+  <label class="sw"><input type="checkbox" id="nt"><span class="track"></span><span>讲稿</span></label>
+  <button id="pv" aria-label="Open presenter view" title="演讲者视图 (P)">⧉</button>
+  <button id="fs" aria-label="Fullscreen">⛶</button>
+</nav>
+
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  const N = slides.length;
+  const $ = id => document.getElementById(id);
+  const pad2 = n => String(n).padStart(2, '0');
+
+  /* ---------- speaker notes (same text as team8_script.md) ---------- */
+  const NOTES = [
+    { s: 'A', t: 20,
+      en: `Good afternoon. We're Team 8, and our case is *Monitoring Employees on Networks*. Our answer fits on one line: **monitor data, not people.** We'll cover the case, what has changed since 2024, the key issues for information systems, and what we recommend.`,
+      zh: `大家好，我们是第八组，案例是《网络上的员工监控》。我们的答案一句话：监控数据，不监控人。我们会讲案例、2024 年以来的变化、信息系统的关键问题，以及我们的建议。` },
+    { s: 'A', t: 50,
+      en: `The case asks a simple question: is the company network being used for work? People shop, watch videos, check social media and send private email during work hours. Firms monitor for three reasons: lost productivity, bandwidth costs, and legal liability if something leaks or someone sends harassing content from a company system. The tools log web use, email, keystrokes, even screens. So the dilemma is company assets versus employee privacy and trust.\n\nIn 2026 the question has moved. It's no longer *who is at their desk*. It's *where the company's data is going*.`,
+      zh: `案例问的是：公司网络是不是在被用来工作？员工上班时间购物、看视频、刷社交媒体、发私人邮件。公司监控有三个理由：生产力损失、带宽成本，以及泄密或骚扰内容带来的法律责任。手段是记录上网、邮件、键盘，甚至屏幕。所以两难是公司资产对员工隐私和信任。\n\n2026 年问题变了：不再是"谁在工位上"，而是"公司的数据去了哪里"。` },
+    { s: 'A', t: 45,
+      en: `Here's why. This is shadow AI in 2026, from Verizon's Data Breach Investigations Report. Forty-five percent of professionals use AI at work regularly. Two thirds of them use personal accounts, outside company control. Non-malicious insider incidents grew four times in one year. And 28 percent of data-loss violations are source code pasted into an AI tool.\n\n{{Meanwhile, the monitoring-software market keeps growing, from 2.5 to 5.8 billion dollars by 2033.}} So most leaks today aren't theft. They're people trying to work faster with the wrong tool.`,
+      zh: `原因在这里。这是 Verizon 2026 年数据泄露调查报告里的影子 AI 数据：45% 的职场人经常在工作中用 AI，其中三分之二用个人账号；非恶意的内部事件一年增至 4 倍；28% 的数据防泄漏违规是把源代码贴进 AI。\n\n同时监控软件市场还在增长，到 2033 年从 25 亿美元涨到 58 亿美元。所以今天大部分泄密不是偷窃，而是员工用错了工具，只想把活干快。` },
+    { s: 'A', t: 25,
+      en: `Monitoring also has a cost. In two 2026 surveys of a thousand Korean workers each, 43 percent feel stress from electronic monitoring, and almost half now guard what they say to colleagues. Eighty percent want clear legal limits. Watching people costs trust.\n\nNow B will show how companies are actually responding.`,
+      zh: `监控也有代价。2026 年两次各 1000 名韩国劳动者的调查显示：43% 因电子监控感到压力，近一半人和同事说话更小心，80% 希望法律明确设限。监视人，代价是信任。\n\n接下来 B 讲企业实际上怎么做。` },
+    { s: 'B', t: 35,
+      en: `Let's start in Korea. In April 2023, a Samsung engineer pasted source code into ChatGPT. Samsung banned external AI and moved to its own model, Gauss. SK hynix also banned external AI and built an internal service on open-source models.\n\nThen, in June 2026, both changed course. Samsung opened ChatGPT, Gemini and Claude. SK hynix is evaluating Copilot and ChatGPT Enterprise, starting with work outside core technology. The pattern is **ban, build, open**. A ban buys time, but it doesn't last.`,
+      zh: `先看韩国。2023 年 4 月，三星一名工程师把源代码贴进 ChatGPT，三星随即禁用外部 AI，改用自研的 Gauss。SK 海力士也禁用外部 AI，用开源模型自建内部服务。\n\n到 2026 年 6 月，两家都转向了：三星开放 ChatGPT、Gemini 和 Claude；SK 海力士在评估 Copilot 和 ChatGPT Enterprise，先从非核心技术领域开始。规律是禁止、自建、开放。禁令能争取时间，但持续不了。` },
+    { s: 'B', t: 40,
+      en: `China and the US show three different tools. **Tencent punishes.** In 2025 it handled more than 70 cases under its "high-voltage lines", the rules that include leaking secrets. More than 90 people were dismissed and more than 20 were handed to the police. **Anthropic protects the asset.** Two people must approve any access to model weights, and only approved software runs on those machines. **Google DeepMind uses contracts.** Departing researchers can be held to a paid non-compete of up to twelve months.\n\nOnly Tencent's approach is about punishing people. The other two protect the data itself.`,
+      zh: `中美两国展示了三种手段。腾讯靠查处：2025 年处理了 70 多起触犯"高压线"的案件（高压线包括泄露机密），90 多人被辞退，20 多人移送公安。Anthropic 靠保护资产：访问模型权重必须两人批准，相关机器只能运行白名单软件。Google DeepMind 靠合同：离职研究员最长要遵守 12 个月的带薪竞业限制。\n\n只有腾讯的做法是针对人的，另外两种保护的是数据本身。` },
+    { s: 'B', t: 20,
+      en: `What about the tools people use every day? A Google Workspace admin can block exports, lock out suspended users, delete a leaver's data, and search everyone's mail and Drive. Feishu gives admins logs, behaviour audits and DLP. The power is similar. What protects the employee is the law.`,
+      zh: `日常协作工具呢？Google Workspace 管理员可以关闭导出、锁住被暂停的账号、删除离职者数据、搜索全员邮件和云盘。飞书给管理员日志、行为审计和防泄漏规则。权力差不多，保护员工的是法律。` },
+    { s: 'B', t: 40,
+      en: `And the law is very different. Darker blue means stronger protection for employees. In **China**, work rules are enough: no consent, only notice and minimum necessity. **Korea** is the strictest: consent or a clearly legitimate interest, consultation with the labour-management council, and reading communication content is a crime. **California** has no specific monitoring statute, but it leads on AI: from 2027, no emotion recognition at work and no discipline by algorithm alone.\n\nC will show what Korean courts have done with these rules.`,
+      zh: `法律差别很大。蓝色越深，对员工保护越强。中国有劳动规章就够了，不需要同意，只要告知和最小必要。韩国最严：需要同意或明显的正当利益，要和劳资协议会协商，看通信内容是犯罪。加州没有专门的监控法，但在 AI 上领先：2027 年起禁止职场情绪识别，也不能只凭算法处分员工。\n\n接下来 C 讲韩国法院怎么判。` },
+    { s: 'C', t: 35,
+      en: `Korean courts draw a clear line. In 2021, the Seoul High Court allowed a company to log URLs and access times under its work rules. That's metadata, and it's lawful. But secretly capturing an employee's KakaoTalk screen led to a prison sentence, suspended. And forensically collecting browsing history from an employee's PC cost a company damages.\n\nLawyers now argue that AI prompts count as content too. So a vague "we may monitor you" clause isn't enough to log them.`,
+      zh: `韩国法院划了一条清楚的线。2021 年首尔高等法院认定，公司依据就业规则记录网址和访问时间是合法的，这是元数据。但偷偷截屏记录员工的 KakaoTalk，被判了有期徒刑缓刑；对员工电脑取证收集浏览记录，公司被判赔偿。\n\n律师现在认为 AI 提示词也属于内容，所以笼统的"公司可能监控"条款不够，不能据此记录提示词。` },
+    { s: 'C', t: 30,
+      en: `That brings us to the first issue for information systems: **leaks got small.** A bulk copy of gigabytes crosses any volume threshold, so it gets caught. But two hundred lines of code pasted into a chatbot is a few kilobytes: high value, and invisible. To see it, you'd have to read content, and content is exactly where the privacy cost and, in Korea, the legal risk are highest.`,
+      zh: `这就引出信息系统的第一个问题：泄密变小了。几个 GB 的批量拷贝会越过流量阈值，能被抓到。但贴进聊天机器人的 200 行代码只有几 KB，价值高却看不见。要看到它就得读内容，而内容正是隐私代价最大、在韩国法律风险最高的地方。` },
+    { s: 'C', t: 45,
+      en: `The second issue is architecture: tap the line, or decrypt it? An **out-of-band tap** copies traffic at the network exit. It sees destinations, volumes and time, but not content, and it can't block. **Inline decryption** puts a proxy in the path that decrypts, reads and re-encrypts everything. It can block, but the privacy cost, the running cost and the legal risk are all high.\n\nWe choose the tap. Two fixes close the gap. Block QUIC, so traffic falls back to TLS, where the destination stays visible. And route enterprise AI through a company gateway, so any direct connection to an AI service is a personal account.`,
+      zh: `第二个问题是架构：旁路监听还是串联解密？旁路在网络出口复制一份流量，能看到目的地、流量和时间，看不到内容，也不能拦截。串联解密在链路中间放一个代理，解密、读取、再加密所有流量，能拦截，但隐私代价、运行成本和法律风险都高。\n\n我们选旁路，再用两个补丁补上缺口：封掉 QUIC，让流量回落到 TLS，目的地仍然可见；企业版 AI 一律走公司网关，这样任何直连 AI 服务的流量就是个人账号。` },
+    { s: 'C', t: 35,
+      en: `Four more problems the design must solve. One: **pseudonymise, don't anonymise.** Names are hidden, but after an alert we must be able to find the person. Two: **sort by destination.** Banks, health and private chat are off-limits; AI tools, cloud drives and code hosts are watched. Three: **blind spots.** Phones, home Wi-Fi and photos of a screen are out of reach. Four: **personal baselines are automated decisions**, and in California that means a risk assessment.\n\nD will now turn this into our recommendations.`,
+      zh: `设计还要解决四个问题。一，假名化而不是匿名化：平时看不到名字，但报警后必须能找到人。二，按目的地分类：银行、医疗、私聊不碰；AI 工具、网盘、代码托管重点看。三，盲区：手机、家里的网络、拍屏幕都管不到。四，个人基线就是自动化决策，在加州要做风险评估。\n\n接下来 D 讲我们的建议。` },
+    { s: 'D', t: 40,
+      en: `Our starting point: output is the company's business; minutes are not. We ask one question: **does this action harm others?** If an employee meets their KPI and spends spare time shopping or watching videos, nobody is harmed, so there's nothing to monitor. Weak output is a performance problem, judged by results. But if data is leaving, or someone is bypassing security, others can be harmed, and that we monitor.\n\n{{Even Google, in its 2004 founders' letter, encouraged staff to spend 20 percent of their time on what they thought would most benefit the company.}}`,
+      zh: `我们的出发点：产出归公司管，每一分钟不归公司管。我们只问一个问题：这个行为会不会伤害别人？员工完成了 KPI，剩下的时间购物、看视频，没有伤害任何人，就没什么要监控的。产出不足是绩效问题，用结果衡量。但如果数据在往外流，或者有人在绕过安全措施，就可能伤害别人，这才需要监控。\n\n连谷歌在 2004 年的创始人信里都鼓励员工把 20% 的时间花在他们认为对公司最有利的事情上。` },
+    { s: 'D', t: 25,
+      en: `That gives a simple rulebook. The company may control company devices, never personal ones. It may collect metadata, and prompts sent through the company AI gateway, because on an enterprise account that's work data. It may not read private chats or screens. Nobody is identified by default, only after an alert, by procedure. And no one is disciplined by an algorithm alone.`,
+      zh: `这样就得到一套简单的规则。公司可以管公司设备，不能碰私人设备；可以收集元数据，以及经公司 AI 网关发出的提示词，因为企业账号里的内容是工作数据；不能看私人聊天和屏幕。默认不识别任何人，只有报警后按程序识别。也不能只凭算法处分任何人。` },
+    { s: 'D', t: 35,
+      en: `Five recommendations, each with evidence. One: **tier data and access**, as SK hynix does by opening non-core work first. Two: **tap, don't decrypt**, because of the Korean court rulings. Three: **put AI behind a company gateway**, because Samsung showed that bans don't last. Four: **pseudonyms, and two signatures to unmask**, like Anthropic's two-person rule. Five: **humans decide**, which California's SB 947 now requires.`,
+      zh: `五条建议，每条都有依据。一，数据和权限分层，就像 SK 海力士先开放非核心领域。二，旁路不解密，依据是韩国判例。三，AI 走公司网关，因为三星证明了禁令持续不了。四，假名加双人签字才能解除，参照 Anthropic 的双人授权。五，由人做决定，加州 SB 947 已经这样要求。` },
+    { s: 'D', t: 30,
+      en: `Here's what that looks like for the security team. Four alerts today, all from metadata. Every user is a pseudonym. Two cases are waiting for two signatures before anyone sees a name. Only one has been unmasked, by HR and the security chief together. And shopping, video, banking, health, private chat and job sites never trigger anything.`,
+      zh: `这是安全团队实际看到的画面。今天四条报警，全部来自元数据。每个用户都是假名。两条在等双人签字，签完才能看到名字。只有一条已经解除假名，由人事和安全负责人共同完成。购物、视频、银行、医疗、私聊、招聘网站永远不会触发报警。` },
+    { s: 'D', t: 15,
+      en: `To sum up: watch where data goes, not what people do. Nobody is named until an alert. Judge output, not minutes. And let people decide; the model only sorts the queue. **Monitor data, not people.** Thank you. We're happy to take your questions.`,
+      zh: `总结一下：看数据去了哪里，不看人在做什么；报警之前不识别任何人；看产出，不看分钟；由人做决定，模型只负责排队。监控数据，不监控人。谢谢，欢迎提问。` },
+    { s: '—', t: 0,
+      en: `Not presented. Stay on the previous slide during Q&A; open this only if someone asks for sources.`,
+      zh: `不讲。问答时停在上一页；有人问出处时再翻到这页。` }
+  ];
+  const PLAN_END = NOTES.reduce((a, n, i) => (a.push((a[i - 1] || 0) + n.t), a), []);
+  const fmt = s => `${Math.floor(s / 60)}:${pad2(Math.floor(s % 60))}`;
+  const md = s => s.split('\n\n').map(p => `<p>${p
+    .replace(/\{\{(.+?)\}\}/g, '<span class="opt">$1</span>')
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/\*(.+?)\*/g, '<i>$1</i>')}</p>`).join('');
+  const titleOf = s => { const h = s.querySelector('h1, h2'); if (!h) return ''; const c = h.cloneNode(true); c.querySelectorAll('.zh').forEach(z => z.remove()); return c.textContent.replace(/\s+/g, ' ').trim(); };
+
+  document.querySelectorAll('svg.waffle').forEach(s => {
+    const n = +s.dataset.n; let h = `<title>${n} of every 100</title>`;
+    for (let i = 0; i < 100; i++) {
+      const c = i % 10, r = Math.floor(i / 10);
+      h += `<rect x="${c * 11}" y="${(9 - r) * 11}" width="9" height="9" rx="1.5" class="${i < n ? 'on' : 'off'}"/>`;
+    }
+    s.setAttribute('viewBox', '0 0 108 108');
+    s.innerHTML = h;
+  });
+
+  slides.forEach((s, k) => {
+    const f = document.createElement('div');
+    f.className = 'foot';
+    f.innerHTML = `<span>${s.dataset.sec || ''}</span><span>${pad2(k + 1)} / ${pad2(N)}</span>`;
+    s.appendChild(f);
+  });
+
+  let cur = 0;
+  function go(n) {
+    cur = Math.max(0, Math.min(N - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('on', k === cur));
+    $('count').textContent = `${pad2(cur + 1)} / ${pad2(N)}`;
+    $('sec').textContent = slides[cur].dataset.sec || '';
+    try { history.replaceState(null, '', '#' + (cur + 1)); } catch (e) {}
+    renderNotes();
+  }
+
+  function setZh(on) {
+    document.body.classList.toggle('zh-on', on);
+    $('zh').checked = on;
+    try { localStorage.setItem('t8-zh', on ? '1' : '0'); } catch (e) {}
+    renderNotes();
+  }
+
+  /* ---------- notes panel, timer, presenter window ---------- */
+  let t0 = null, pres = null;
+  const startTimer = () => { if (t0 === null) t0 = Date.now(); };
+  const elapsed = () => t0 === null ? 0 : (Date.now() - t0) / 1000;
+
+  function headHTML() {
+    const n = NOTES[cur] || {}, el = elapsed(), plan = PLAN_END[cur] || 0;
+    const late = t0 !== null && el > plan + 5;
+    return `<div class="np-head">
+      <span class="spk">${n.s || ''}</span>
+      <span>Slide ${pad2(cur + 1)} / ${pad2(N)}</span>
+      <span>Budget ${n.t || 0}s</span>
+      <span class="${t0 === null ? '' : late ? 'late' : 'good'}">Elapsed ${fmt(el)} · plan ${fmt(plan)}</span>
+      <span>R = reset timer</span></div>`;
+  }
+  function bodyHTML() {
+    const n = NOTES[cur] || { en: '', zh: '' };
+    const next = slides[cur + 1] ? `Next → ${titleOf(slides[cur + 1])}` : 'End';
+    return `<div class="np-en">${md(n.en)}</div><div class="np-zh">${md(n.zh)}</div><div class="np-next">${next}</div>`;
+  }
+  function renderNotes() {
+    if (typeof cur === 'undefined') return;
+    if (document.body.classList.contains('notes-on')) $('notes').innerHTML = headHTML() + bodyHTML();
+    if (pres && !pres.closed) {
+      const d = pres.document;
+      d.body.classList.toggle('zh-on', document.body.classList.contains('zh-on'));
+      d.getElementById('head').innerHTML = headHTML();
+      d.getElementById('body').innerHTML = bodyHTML();
+    }
+  }
+  function tick() {
+    const html = headHTML();
+    if (document.body.classList.contains('notes-on')) { const h = $('notes').querySelector('.np-head'); if (h) h.outerHTML = html; }
+    if (pres && !pres.closed) pres.document.getElementById('head').innerHTML = html;
+  }
+  setInterval(tick, 1000);
+
+  function setNotes(on) {
+    document.body.classList.toggle('notes-on', on);
+    $('nt').checked = on;
+    if (on) startTimer();
+    try { localStorage.setItem('t8-notes', on ? '1' : '0'); } catch (e) {}
+    renderNotes();
+  }
+
+  function openPresenter() {
+    if (pres && !pres.closed) { pres.focus(); return; }
+    pres = window.open('', 't8-presenter', 'width=980,height=720');
+    if (!pres) { alert('浏览器拦截了弹出窗口。请允许这个页面打开弹窗，然后再按 P。'); return; }
+    const css = [...document.querySelectorAll('style')].map(s => s.textContent).join('\n');
+    pres.document.open();
+    pres.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Presenter · Team 8</title>
+      <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;600&family=Noto+Sans+SC:wght@400&display=swap" rel="stylesheet">
+      <style>${css}
+        html, body { height: auto; overflow: auto; }
+        body { background: #24252a; padding: 20px 28px; font: 22px/1.6 "IBM Plex Sans", system-ui, sans-serif; color: #e8e6e1; }
+        .np-head { font-size: 15px; } .np-zh { font-size: 18px; } .np-next { font-size: 14px; }
+      </style></head><body><div id="head"></div><div id="body"></div></body></html>`);
+    pres.document.close();
+    pres.document.addEventListener('keydown', onKey);
+    startTimer();
+    renderNotes();
+  }
+
+  function onKey(e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const k = e.key;
+    if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'ArrowDown') { e.preventDefault(); go(cur + 1); }
+    else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'ArrowUp') { e.preventDefault(); go(cur - 1); }
+    else if (k === 'Home') go(0);
+    else if (k === 'End') go(N - 1);
+    else if (k === 't' || k === 'T') setZh(!document.body.classList.contains('zh-on'));
+    else if (k === 'n' || k === 'N') setNotes(!document.body.classList.contains('notes-on'));
+    else if (k === 'p' || k === 'P') openPresenter();
+    else if (k === 'r' || k === 'R') { t0 = Date.now(); renderNotes(); }
+    else if (k === 'f' || k === 'F') toggleFs();
+  }
+
+  function toggleFs() {
+    if (document.fullscreenElement) document.exitFullscreen?.();
+    else document.documentElement.requestFullscreen?.();
+  }
+
+  $('prev').addEventListener('click', e => { go(cur - 1); e.currentTarget.blur(); });
+  $('next').addEventListener('click', e => { go(cur + 1); e.currentTarget.blur(); });
+  $('fs').addEventListener('click', e => { toggleFs(); e.currentTarget.blur(); });
+  $('zh').addEventListener('change', e => setZh(e.target.checked));
+  document.addEventListener('fullscreenchange', () => document.body.classList.toggle('fs', !!document.fullscreenElement));
+
+  document.addEventListener('keydown', onKey);
+  $('nt').addEventListener('change', e => setNotes(e.target.checked));
+  $('pv').addEventListener('click', e => { openPresenter(); e.currentTarget.blur(); });
+  window.addEventListener('beforeunload', () => { if (pres && !pres.closed) pres.close(); });
+
+  let tx = null;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    if (tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1));
+    tx = null;
+  });
+
+  let saved = false;
+  try { saved = localStorage.getItem('t8-zh') === '1'; } catch (e) {}
+  let savedNotes = false;
+  try { savedNotes = localStorage.getItem('t8-notes') === '1'; } catch (e) {}
+  setZh(saved);
+  setNotes(savedNotes);
+  const h = parseInt(location.hash.slice(1), 10);
+  go(isNaN(h) ? 0 : h - 1);
+</script>
+</body>
+</html>

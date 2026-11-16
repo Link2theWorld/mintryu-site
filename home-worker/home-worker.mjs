@@ -23,7 +23,7 @@ const PERSON = {
   description: "独立开发者。做 Windows 实时 AI 变声软件 Mintaria 萌音、人声 VST3 插件 Mintaria Pantheon、直播混音声卡机架 Melorb、Word 桌面印章 mignet 等软件和小工具，也在博客里写 AI、软件开发、音频与韩国生活。",
   email: "mailto:me@mintryu.com",
   knowsAbout: ["C++", "JUCE", "VST3", "音频插件开发", "实时 AI 语音", "AI 应用", "音乐", "摄影"],
-  sameAs: ["https://x.com/Ryusoohow", "https://www.youtube.com/@mint8733", "https://github.com/ysuhao"]
+  sameAs: ["https://x.com/Ryusoohow", "https://www.youtube.com/@mint8733", "https://github.com/ysuhao", "https://scholar.google.com/citations?user=xNI0498AAAAJ"]
 };
 
 // Projects. `links` are the URLs that count as a page showing the project: the homepage ItemList
@@ -89,6 +89,8 @@ const PRESENTATIONS = "/presentations/";
 const PAGES = {
   "/works/": { name: "其他作品", collection: true },
   "/presentations/": { name: "发表目录", collection: true },
+  "/presentations/coupang-jd/": { parent: PRESENTATIONS, presentation: true },
+  "/presentations/monitoring-employees/": { parent: PRESENTATIONS, presentation: true },
   "/presentations/figma-ax/": { parent: PRESENTATIONS, presentation: true },
   "/presentations/jochiwon-bm/": { parent: PRESENTATIONS, presentation: true },
   "/presentations/jwcc-ucm/": { parent: PRESENTATIONS, presentation: true, description: "JEDI에서 JWCC, 그리고 UCM까지. 미 국방부의 클라우드 구매 방식이 어떻게 바뀌었고 정보시스템 관리에 어떤 과제를 남겼는지 다룬 고려대학교 MIS 발표입니다." },
@@ -194,7 +196,7 @@ async function llmsTxt(env) {
     `- [AI 订阅向导 mintguide](https://ai.mintryu.com/)：面向中国大陆新手的 ChatGPT / Claude / Grok / Gemini 订阅准备向导；介绍页 ${SITE_ORIGIN}/works/ai-guide/`,
     `- [豪意值检测](${SITE_ORIGIN}/works/haoyi-check/)：15 道题的自嘲向互动测验`,
     `- [人格验牌](${SITE_ORIGIN}/persona-check/)：16 道站队题的中文互联网圈层测验`,
-    `- [发表目录](${SITE_ORIGIN}/presentations/)：课堂发表与互动演示（Figma AX 与 AI 时代的工具生存、Yext B2B SaaS 商业模式、JWCC UCM、AI Agent 与 GEO、ESG 联合分析）`
+    `- [发表目录](${SITE_ORIGIN}/presentations/)：课堂发表与互动演示（酷澎 vs 京东物流战略、员工网络监控、Figma AX 与 AI 时代的工具生存、Yext B2B SaaS 商业模式、JWCC UCM、AI Agent 与 GEO、ESG 联合分析）`
   ];
   const postLines = posts.length
     ? posts.map((post) => {
@@ -217,7 +219,7 @@ async function llmsTxt(env) {
     `- 头像：${SITE_ORIGIN}${AVATAR.path}`,
     `- 主页：${SITE_ORIGIN}/`,
     "- 邮箱：me@mintryu.com、2025461029@korea.edu",
-    "- X：https://x.com/Ryusoohow ；YouTube：https://www.youtube.com/@mint8733 ；GitHub：https://github.com/ysuhao",
+    "- X：https://x.com/Ryusoohow ；YouTube：https://www.youtube.com/@mint8733 ；GitHub：https://github.com/ysuhao ；Google Scholar：https://scholar.google.com/citations?user=xNI0498AAAAJ",
     "",
     "## 软件与作品",
     ...projectLines,
