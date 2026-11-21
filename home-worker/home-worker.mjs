@@ -21,7 +21,7 @@ const PERSON = {
   jobTitle: "独立开发者",
   image: { "@type": "ImageObject", url: `${SITE_ORIGIN}${AVATAR.path}`, width: AVATAR.width, height: AVATAR.height },
   description: "独立开发者。做 Windows 实时 AI 变声软件 Mintaria 萌音、人声 VST3 插件 Mintaria Pantheon、直播混音声卡机架 Melorb、Word 桌面印章 mignet 等软件和小工具，也在博客里写 AI、软件开发、音频与韩国生活。",
-  email: "mailto:me@mintryu.com",
+  email: "mailto:i@fand.dev",
   knowsAbout: ["C++", "JUCE", "VST3", "音频插件开发", "实时 AI 语音", "AI 应用", "音乐", "摄影"],
   sameAs: ["https://x.com/Ryusoohow", "https://www.youtube.com/@mint8733", "https://github.com/ysuhao", "https://scholar.google.com/citations?user=xNI0498AAAAJ"]
 };
@@ -218,7 +218,7 @@ async function llmsTxt(env) {
     `- 实体 ID：${PERSON_ID}`,
     `- 头像：${SITE_ORIGIN}${AVATAR.path}`,
     `- 主页：${SITE_ORIGIN}/`,
-    "- 邮箱：me@mintryu.com、2025461029@korea.edu",
+    "- 邮箱：i@fand.dev",
     "- X：https://x.com/Ryusoohow ；YouTube：https://www.youtube.com/@mint8733 ；GitHub：https://github.com/ysuhao ；Google Scholar：https://scholar.google.com/citations?user=xNI0498AAAAJ",
     "",
     "## 软件与作品",
