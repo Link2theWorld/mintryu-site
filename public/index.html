@@ -548,7 +548,7 @@
             </g>
           </svg>
         </div>
-        <p class="roles"><b>Mint Ryu</b><span class="sticker">indie studio</span><span class="roles-sub">Code · Sound · Light</span></p>
+        <p class="roles"><b>Mint Ryu</b><span class="sticker">indie studio</span></p>
 
         <div class="ticket-wrap">
         <img class="figure" src="/images/flover-figure.webp" alt="" width="452" height="1200" decoding="async">
@@ -778,6 +778,7 @@
         <h2 class="block-label mono" id="contact-title">Contact<span>想说点什么？</span></h2>
         <ul class="contact">
           <li><button type="button" data-copy="KwonNayeon"><span class="mono">WeChat</span><span>KwonNayeon</span><span class="arrow">复制</span></button></li>
+          <li><button type="button" data-copy="4362111"><span class="mono">QQ</span><span>4362111</span><span class="arrow">复制</span></button></li>
           <li><a href="mailto:i@fand.dev"><span class="mono">Email</span><span>i@fand.dev</span><span class="arrow" aria-hidden="true">↗</span></a></li>
           <li><a href="https://x.com/Ryusoohow" target="_blank" rel="me noopener noreferrer"><span class="mono">X</span><span>@Ryusoohow</span><span class="arrow" aria-hidden="true">↗</span></a></li>
           <li><a href="https://www.youtube.com/@mint8733" target="_blank" rel="me noopener noreferrer"><span class="mono">YouTube</span><span>@mint8733</span><span class="arrow" aria-hidden="true">↗</span></a></li>
@@ -1297,7 +1298,7 @@
       load();
     })();
 
-    // WeChat has no web link, so its contact row copies the ID instead.
+    // WeChat and QQ have no web link, so their contact rows copy the ID instead.
     document.querySelectorAll('.contact [data-copy]').forEach((button) => {
       const label = button.querySelector('.arrow');
       button.addEventListener('click', async () => {
